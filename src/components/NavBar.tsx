@@ -87,13 +87,12 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 px: 0,
               }}
             >
+              {/* <h1>{data}</h1> */}
               <Typography
                 variant='h6'
                 color='text.primary'
                 sx={{ fontWeight: 700, cursor: 'pointer', marginLeft: '12px' }}
-              >
-                L.E
-              </Typography>
+              ></Typography>
               {/* <img
                 src={
                   'www.url.to.logo.png'
