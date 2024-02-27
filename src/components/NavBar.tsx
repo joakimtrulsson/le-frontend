@@ -92,7 +92,9 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 variant='h6'
                 color='text.primary'
                 sx={{ fontWeight: 700, cursor: 'pointer', marginLeft: '12px' }}
-              ></Typography>
+              >
+                L.E
+              </Typography>
               {/* <img
                 src={
                   'www.url.to.logo.png'

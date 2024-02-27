@@ -7,6 +7,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import getLightDarkTheme from './getLightDarkTheme';
 
 import NavBar from './components/NavBar';
+import Hero from './components/Hero';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -27,6 +28,7 @@ function App() {
         <ThemeProvider theme={LightDarkTheme}>
           <CssBaseline />
           <NavBar mode={mode} toggleLightDarkMode={toggleLightDarkMode} />
+          <Hero />
         </ThemeProvider>
       </ApolloProvider>
     </>
