@@ -35,6 +35,7 @@ function App() {
         <Box sx={{ bgcolor: 'background.default' }}>
           <Products />
           <Divider />
+          <Divider />
           <Footer />
         </Box>
       </ThemeProvider>
