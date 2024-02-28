@@ -103,6 +103,15 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
 
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
+                  onClick={() => scrollToSection('products')}
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant='body2' color='text.primary'>
+                    Produkter
+                  </Typography>
+                </MenuItem>
+
+                <MenuItem
                   onClick={() => scrollToSection('projects')}
                   sx={{ py: '6px', px: '12px' }}
                 >
@@ -110,14 +119,7 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                     Våra projekt
                   </Typography>
                 </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('reviews')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant='body2' color='text.primary'>
-                    Omdömen
-                  </Typography>
-                </MenuItem>
+
                 <MenuItem
                   onClick={() => scrollToSection('services')}
                   sx={{ py: '6px', px: '12px' }}
@@ -126,20 +128,22 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                     Tjänster
                   </Typography>
                 </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('products')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant='body2' color='text.primary'>
-                    Produkter
-                  </Typography>
-                </MenuItem>
+
                 <MenuItem
                   onClick={() => scrollToSection('offers')}
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant='body2' color='text.primary'>
                     Erbjudande
+                  </Typography>
+                </MenuItem>
+
+                <MenuItem
+                  onClick={() => scrollToSection('reviews')}
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant='body2' color='text.primary'>
+                    Omdömen
                   </Typography>
                 </MenuItem>
               </Box>
@@ -210,6 +214,7 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                   <MenuItem onClick={() => scrollToSection('offers')}>
                     Erbjudande
                   </MenuItem>
+                  <MenuItem onClick={() => scrollToSection('reviews')}>Omdömen</MenuItem>
                   <Divider />
                   <MenuItem>
                     <Button

@@ -12,6 +12,7 @@ import NavBar from './components/NavBar';
 import Hero from './components/Hero';
 import Products from './components/Products';
 import Footer from './components/Footer';
+import Projects from './components/Projects';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -34,6 +35,8 @@ function App() {
         <Hero />
         <Box sx={{ bgcolor: 'background.default' }}>
           <Products />
+          <Divider />
+          <Projects />
           <Divider />
           <Footer />
         </Box>

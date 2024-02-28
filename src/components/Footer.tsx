@@ -51,7 +51,7 @@ export default function Footer() {
           justifyContent: 'center',
         }}
       >
-        <Typography
+        {/* <Typography
           component='h1'
           variant='h1'
           sx={{
@@ -73,7 +73,7 @@ export default function Footer() {
           >
             Entreprenad
           </Typography>
-        </Typography>
+        </Typography> */}
         <Box
           sx={{
             display: { xs: 'none', sm: 'flex' },
