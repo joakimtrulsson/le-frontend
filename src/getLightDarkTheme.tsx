@@ -176,6 +176,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
     },
     h6: {
       fontSize: 18,
+      fontWeight: 600,
     },
     subtitle1: {
       fontSize: 18,

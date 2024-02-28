@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { PaletteMode } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
@@ -8,6 +10,7 @@ import getLightDarkTheme from './getLightDarkTheme';
 
 import NavBar from './components/NavBar';
 import Hero from './components/Hero';
+import Products from './components/Products';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -23,15 +26,17 @@ function App() {
   };
 
   return (
-    <>
-      <ApolloProvider client={client}>
-        <ThemeProvider theme={LightDarkTheme}>
-          <CssBaseline />
-          <NavBar mode={mode} toggleLightDarkMode={toggleLightDarkMode} />
-          <Hero />
-        </ThemeProvider>
-      </ApolloProvider>
-    </>
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={LightDarkTheme}>
+        <CssBaseline />
+        <NavBar mode={mode} toggleLightDarkMode={toggleLightDarkMode} />
+        <Hero />
+        <Box sx={{ bgcolor: 'background.default' }}>
+          <Products />
+          <Divider />
+        </Box>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 }
 

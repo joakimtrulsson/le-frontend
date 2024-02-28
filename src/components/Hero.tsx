@@ -119,7 +119,7 @@ export default function Hero() {
           <Box
             id='image'
             sx={(theme) => ({
-              mt: { xs: 8, sm: 10 },
+              mt: { xs: 6, sm: 8 },
               alignSelf: 'center',
               height: { xs: 250, sm: 700 },
               width: '100%',
