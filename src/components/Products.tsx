@@ -76,8 +76,8 @@ export default function Products() {
     <Box
       id='products'
       sx={{
-        pt: { xs: 4, sm: 12 },
-        pb: { xs: 8, sm: 16 },
+        pt: { xs: 3, sm: 8 },
+        pb: { xs: 6, sm: 8 },
         color: 'white',
         bgcolor: '#06090a',
       }}

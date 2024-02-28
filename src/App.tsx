@@ -11,6 +11,7 @@ import getLightDarkTheme from './getLightDarkTheme';
 import NavBar from './components/NavBar';
 import Hero from './components/Hero';
 import Products from './components/Products';
+import Footer from './components/Footer';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -34,6 +35,7 @@ function App() {
         <Box sx={{ bgcolor: 'background.default' }}>
           <Products />
           <Divider />
+          <Footer />
         </Box>
       </ThemeProvider>
     </ApolloProvider>

@@ -87,21 +87,20 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 px: 0,
               }}
             >
-              {/* <h1>{data}</h1> */}
               <Typography
-                variant='h6'
                 color='text.primary'
-                sx={{ fontWeight: 700, cursor: 'pointer', marginLeft: '12px' }}
+                sx={{
+                  fontFamily: 'Times New Roman, serif',
+                  fontSize: '24px',
+                  fontWeight: 600,
+                  letterSpacing: 1.05,
+                  lineHeight: 78 / 70,
+                  mx: { xs: 2, sm: 3 },
+                }}
               >
                 L.E
               </Typography>
-              {/* <img
-                src={
-                  'www.url.to.logo.png'
-                }
-                style={logoStyle}
-                alt="logo of LE's website"
-              /> */}
+
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem
                   onClick={() => scrollToSection('projects')}
@@ -161,7 +160,7 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 variant='contained'
                 size='small'
                 component='a'
-                href='/material-ui/getting-started/templates/sign-up/'
+                href='link'
                 target='_blank'
               >
                 Kontakta oss
@@ -217,7 +216,7 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                       color='primary'
                       variant='contained'
                       component='a'
-                      href='/material-ui/getting-started/templates/sign-up/'
+                      href='link'
                       target='_blank'
                       sx={{ width: '100%' }}
                     >
