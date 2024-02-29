@@ -14,6 +14,7 @@ import Products from './components/Products';
 import Footer from './components/Footer';
 import Projects from './components/Projects';
 import Services from './components/Services';
+import Reviews from './components/Reviews';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -40,6 +41,8 @@ function App() {
           <Projects />
           <Divider />
           <Services />
+          <Divider />
+          <Reviews />
           <Divider />
           <Footer />
         </Box>

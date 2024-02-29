@@ -12,12 +12,6 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleLightDarkMode from './ToggleLightDarkMode';
 
-// const logoStyle = {
-//   width: '140px',
-//   height: 'auto',
-//   cursor: 'pointer',
-// };
-
 interface NavBarProps {
   mode: PaletteMode;
   toggleLightDarkMode: () => void;
@@ -32,7 +26,7 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
 
   const scrollToSection = (sectionId: string) => {
     const sectionElement = document.getElementById(sectionId);
-    const offset = 128;
+    const offset = 50;
     if (sectionElement) {
       const targetScroll = sectionElement.offsetTop - offset;
       sectionElement.scrollIntoView({ behavior: 'smooth' });
