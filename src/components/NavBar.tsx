@@ -20,7 +20,7 @@ interface NavBarProps {
 }
 
 const logoStyle = {
-  width: '42px',
+  width: '36px',
   height: 'auto',
   marginRight: '12px',
   cursor: 'pointer',

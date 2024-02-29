@@ -83,7 +83,7 @@ export default function Hero({ mode }: HeroProps) {
           <Box
             sx={{
               display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
+              flexDirection: { xs: 'row', md: 'row' },
               alignSelf: 'center',
               textAlign: 'center',
             }}
@@ -95,29 +95,47 @@ export default function Hero({ mode }: HeroProps) {
                 alt='logo of le entreprenad'
               />
             </Box>
-            {tempSiteConfig &&
-              tempSiteConfig.siteTitle.split(' ').map((word, index, arr) => (
+            {
+              tempSiteConfig && (
                 <Typography
-                  key={index}
-                  component='h1'
-                  variant='h2'
+                  variant='h5'
                   sx={{
+                    // ml: 0,
                     alignSelf: 'center',
                     fontFamily: 'Times New Roman, Serif',
-                    color:
-                      index === arr.length - 1
-                        ? (theme) =>
-                            theme.palette.mode === 'light'
-                              ? 'primary.main'
-                              : 'primary.light'
-                        : 'inherit',
-                    marginRight:
-                      index !== arr.length - 1 ? { xs: '0em', sm: '0.2em' } : '0',
+                    fontWeight: '600',
+
+                    color: 'text.secondary',
                   }}
                 >
-                  {word}
+                  Entreprenad & Byggservice
                 </Typography>
-              ))}
+              )
+              // tempSiteConfig.siteTitle.split(' ').map((word, index, arr) => (
+              //   <Typography
+              //     key={index}
+              //     component='h1'
+              //     variant='h2'
+              //     sx={{
+              //       alignSelf: 'center',
+              //       fontFamily: 'Times New Roman, Serif',
+              //       color:
+              //         index === arr.length - 1
+              //           ? (theme) =>
+              //               theme.palette.mode === 'light'
+              //                 ? 'primary.main'
+              //                 : 'primary.light'
+              //           : 'inherit',
+              //       marginRight:
+              //         index !== arr.length - 1 ? { xs: '0em', sm: '0.2em' } : '0',
+              //     }}
+              //   >
+              //     {word}
+              //   </Typography>
+              // )
+
+              // )
+            }
           </Box>
 
           {tempSiteConfig && (
