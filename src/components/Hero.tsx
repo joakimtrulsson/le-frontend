@@ -5,6 +5,8 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
+import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 
 import { useQuery, gql } from '@apollo/client';
@@ -23,7 +25,15 @@ const GET_HERO = gql`
   }
 `;
 
-export default function Hero() {
+const logoStyle = {
+  width: '72px',
+  height: 'auto',
+  cursor: 'pointer',
+  fontColor: 'red',
+  marginRight: '12px',
+};
+
+export default function Hero({ mode }) {
   const { data } = useQuery(GET_HERO);
   const [tempSiteConfig, setTempSiteConfig] = React.useState<{
     siteTitle: string;
@@ -65,9 +75,7 @@ export default function Hero() {
         }}
       >
         <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
-          <Typography
-            component='h1'
-            variant='h1'
+          <Box
             sx={{
               display: 'flex',
               flexDirection: { xs: 'column', md: 'row' },
@@ -75,13 +83,22 @@ export default function Hero() {
               textAlign: 'center',
             }}
           >
+            <Box>
+              <img
+                src={mode === 'light' ? lightLogo : darkLogo}
+                style={logoStyle}
+                alt='logo of le entreprenad'
+              />
+            </Box>
             {tempSiteConfig &&
               tempSiteConfig.siteTitle.split(' ').map((word, index, arr) => (
                 <Typography
                   key={index}
-                  component='span'
-                  variant='h1'
+                  component='h1'
+                  variant='h2'
                   sx={{
+                    alignSelf: 'center',
+                    fontFamily: 'Times New Roman, Serif',
                     color:
                       index === arr.length - 1
                         ? (theme) =>
@@ -96,7 +113,7 @@ export default function Hero() {
                   {word}
                 </Typography>
               ))}
-          </Typography>
+          </Box>
 
           {tempSiteConfig && (
             <Box color='text.secondary'>

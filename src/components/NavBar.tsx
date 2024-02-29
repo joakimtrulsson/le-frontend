@@ -11,11 +11,20 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleLightDarkMode from './ToggleLightDarkMode';
+import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
+import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
 
 interface NavBarProps {
   mode: PaletteMode;
   toggleLightDarkMode: () => void;
 }
+
+const logoStyle = {
+  width: '42px',
+  height: 'auto',
+  marginRight: '12px',
+  cursor: 'pointer',
+};
 
 function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
   const [open, setOpen] = React.useState(false);
@@ -77,23 +86,16 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 flexGrow: 1,
                 display: 'flex',
                 alignItems: 'center',
-                ml: '-18px',
+                // ml: '-26px',
+                // mr: 2,
                 px: 0,
               }}
             >
-              <Typography
-                color='text.primary'
-                sx={{
-                  fontFamily: 'Times New Roman, serif',
-                  fontSize: '24px',
-                  fontWeight: 600,
-                  letterSpacing: 1.05,
-                  lineHeight: 78 / 70,
-                  mx: { xs: 2, sm: 3 },
-                }}
-              >
-                L.E
-              </Typography>
+              <img
+                src={mode === 'light' ? lightLogo : darkLogo}
+                style={logoStyle}
+                alt='logo of le entreprenad'
+              />
 
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                 <MenuItem

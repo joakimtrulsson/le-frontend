@@ -34,7 +34,7 @@ function App() {
       <ThemeProvider theme={LightDarkTheme}>
         <CssBaseline />
         <NavBar mode={mode} toggleLightDarkMode={toggleLightDarkMode} />
-        <Hero />
+        <Hero mode={mode} />
         <Box sx={{ bgcolor: 'background.default' }}>
           <Products />
           <Divider />
@@ -44,7 +44,7 @@ function App() {
           <Divider />
           <Reviews />
           <Divider />
-          <Footer />
+          <Footer mode={mode} />
         </Box>
       </ThemeProvider>
     </ApolloProvider>

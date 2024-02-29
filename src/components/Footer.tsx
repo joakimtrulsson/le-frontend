@@ -4,10 +4,17 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { PaletteMode } from '@mui/material';
 
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
+import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
+
+interface FooterProps {
+  mode: PaletteMode;
+}
 
 function Copyright() {
   return (
@@ -19,7 +26,14 @@ function Copyright() {
   );
 }
 
-export default function Footer() {
+const logoStyle = {
+  width: '56px',
+  height: 'auto',
+  cursor: 'pointer',
+  fontColor: 'red',
+};
+
+export default function Footer({ mode }: FooterProps) {
   const scrollToSection = (sectionId: string) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 50;
@@ -51,29 +65,26 @@ export default function Footer() {
           justifyContent: 'center',
         }}
       >
-        {/* <Typography
-          component='h1'
-          variant='h1'
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', md: 'row' },
-            alignSelf: 'center',
-            textAlign: 'center',
-          }}
-        >
-          L.E &nbsp;
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+          <img
+            src={mode === 'light' ? lightLogo : darkLogo}
+            style={logoStyle}
+            alt='logo of le entreprenad'
+          />
           <Typography
-            component='span'
-            variant='h1'
+            // variant='h5'
             sx={{
-              mb: { xs: 2, md: 2 },
-              color: (theme) =>
-                theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
+              ml: 1,
+              alignSelf: 'center',
+              fontFamily: 'Times New Roman, Serif',
+              fontWeight: '600',
+              color: 'text.secondary',
             }}
           >
-            Entreprenad
+            Entreprenad & Byggservice
           </Typography>
-        </Typography> */}
+        </Box>
+
         <Box
           sx={{
             display: { xs: 'none', sm: 'flex' },
