@@ -82,6 +82,7 @@ export default function Reviews() {
         }}
       >
         <Typography
+          fontFamily='Times New Roman, serif'
           component='h2'
           variant='h4'
           color='text.primary'

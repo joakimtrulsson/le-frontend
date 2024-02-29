@@ -98,6 +98,7 @@ export default function Projects() {
           <Grid item xs={12} md={6}>
             <div>
               <Typography
+                fontFamily='Times New Roman, serif'
                 component='h2'
                 variant='h4'
                 color='text.primary'

@@ -35,7 +35,6 @@ const logoStyle = {
   height: 'auto',
   cursor: 'pointer',
   fontColor: 'red',
-  marginRight: '12px',
 };
 
 export default function Hero({ mode }: HeroProps) {
@@ -83,7 +82,7 @@ export default function Hero({ mode }: HeroProps) {
           <Box
             sx={{
               display: 'flex',
-              flexDirection: { xs: 'row', md: 'row' },
+              flexDirection: { xs: 'row', md: 'column' },
               alignSelf: 'center',
               textAlign: 'center',
             }}
@@ -101,7 +100,7 @@ export default function Hero({ mode }: HeroProps) {
                   variant='h5'
                   sx={{
                     // ml: 0,
-                    alignSelf: 'center',
+                    // alignSelf: 'center',
                     fontFamily: 'Times New Roman, Serif',
                     fontWeight: '600',
 

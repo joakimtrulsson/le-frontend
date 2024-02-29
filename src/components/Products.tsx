@@ -97,7 +97,12 @@ export default function Products() {
             textAlign: { sm: 'left', md: 'center' },
           }}
         >
-          <Typography textAlign='center' component='h2' variant='h4'>
+          <Typography
+            fontFamily='Times New Roman, serif'
+            textAlign='center'
+            component='h2'
+            variant='h4'
+          >
             Våra produkter
           </Typography>
           <Typography variant='body1' sx={{ color: 'grey.400' }}>

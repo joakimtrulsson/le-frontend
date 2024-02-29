@@ -76,7 +76,7 @@ export default function Services() {
             textAlign: { sm: 'left', md: 'center' },
           }}
         >
-          <Typography component='h2' variant='h4'>
+          <Typography fontFamily='Times New Roman, serif' component='h2' variant='h4'>
             Våra tjänster
           </Typography>
           <Typography variant='body1' sx={{ color: 'grey.400' }}>
