@@ -13,6 +13,7 @@ import Hero from './components/Hero';
 import Products from './components/Products';
 import Footer from './components/Footer';
 import Projects from './components/Projects';
+import Services from './components/Services';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -37,6 +38,8 @@ function App() {
           <Products />
           <Divider />
           <Projects />
+          <Divider />
+          <Services />
           <Divider />
           <Footer />
         </Box>
