@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { alpha } from '@mui/material';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -9,6 +8,8 @@ import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
 import { PaletteMode } from '@mui/material';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
+
+import Forms from './Forms';
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -82,7 +83,7 @@ export default function Hero({ mode }: HeroProps) {
           <Box
             sx={{
               display: 'flex',
-              flexDirection: { xs: 'row', md: 'column' },
+              flexDirection: { xs: 'column', md: 'column' },
               alignSelf: 'center',
               textAlign: 'center',
             }}
@@ -94,47 +95,18 @@ export default function Hero({ mode }: HeroProps) {
                 alt='logo of le entreprenad'
               />
             </Box>
-            {
-              tempSiteConfig && (
-                <Typography
-                  variant='h5'
-                  sx={{
-                    // ml: 0,
-                    // alignSelf: 'center',
-                    fontFamily: 'Times New Roman, Serif',
-                    fontWeight: '600',
-
-                    color: 'text.secondary',
-                  }}
-                >
-                  Entreprenad & Byggservice
-                </Typography>
-              )
-              // tempSiteConfig.siteTitle.split(' ').map((word, index, arr) => (
-              //   <Typography
-              //     key={index}
-              //     component='h1'
-              //     variant='h2'
-              //     sx={{
-              //       alignSelf: 'center',
-              //       fontFamily: 'Times New Roman, Serif',
-              //       color:
-              //         index === arr.length - 1
-              //           ? (theme) =>
-              //               theme.palette.mode === 'light'
-              //                 ? 'primary.main'
-              //                 : 'primary.light'
-              //           : 'inherit',
-              //       marginRight:
-              //         index !== arr.length - 1 ? { xs: '0em', sm: '0.2em' } : '0',
-              //     }}
-              //   >
-              //     {word}
-              //   </Typography>
-              // )
-
-              // )
-            }
+            {tempSiteConfig && (
+              <Typography
+                variant='h5'
+                sx={{
+                  fontFamily: 'Times New Roman, Serif',
+                  fontWeight: '600',
+                  color: 'text.secondary',
+                }}
+              >
+                Entreprenad & Byggservice
+              </Typography>
+            )}
           </Box>
 
           {tempSiteConfig && (
@@ -149,9 +121,7 @@ export default function Hero({ mode }: HeroProps) {
             useFlexGap
             sx={{ pt: 2, width: { xs: '100%', sm: 'auto' } }}
           >
-            <Button variant='contained' color='primary'>
-              Kontakta oss
-            </Button>
+            <Forms mode={mode} />
           </Stack>
         </Stack>
         {tempSiteConfig && (

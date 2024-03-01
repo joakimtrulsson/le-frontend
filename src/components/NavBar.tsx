@@ -14,6 +14,8 @@ import ToggleLightDarkMode from './ToggleLightDarkMode';
 import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
 
+import Forms from './Forms';
+
 interface NavBarProps {
   mode: PaletteMode;
   toggleLightDarkMode: () => void;
@@ -155,16 +157,8 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 mode={mode}
                 toggleLightDarkMode={toggleLightDarkMode}
               />
-              <Button
-                color='primary'
-                variant='contained'
-                size='small'
-                component='a'
-                href='link'
-                target='_blank'
-              >
-                Kontakta oss
-              </Button>
+
+              <Forms mode={mode} />
             </Box>
             <Box sx={{ display: { sm: '', md: 'none' } }}>
               <Button
@@ -213,16 +207,7 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                   <MenuItem onClick={() => scrollToSection('reviews')}>Omdömen</MenuItem>
                   <Divider />
                   <MenuItem>
-                    <Button
-                      color='primary'
-                      variant='contained'
-                      component='a'
-                      href='link'
-                      target='_blank'
-                      sx={{ width: '100%' }}
-                    >
-                      Kontakta oss
-                    </Button>
+                    <Forms mode={mode} />
                   </MenuItem>
                 </Box>
               </Drawer>

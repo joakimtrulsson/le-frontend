@@ -73,7 +73,8 @@ export default function Services() {
         <Box
           sx={{
             width: { sm: '100%', md: '60%' },
-            textAlign: { sm: 'left', md: 'center' },
+            // textAlign: { sm: 'center', md: 'center' },
+            textAlign: 'center',
           }}
         >
           <Typography fontFamily='Times New Roman, serif' component='h2' variant='h4'>
