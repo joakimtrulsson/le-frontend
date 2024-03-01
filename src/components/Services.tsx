@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
@@ -10,6 +11,19 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import WaterDamageIcon from '@mui/icons-material/WaterDamage';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import ForestIcon from '@mui/icons-material/Forest';
+import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
+
+import { useQuery, gql } from '@apollo/client';
+
+const GET_SERVICE_PREAMBLE = gql`
+  query SiteConfig {
+    siteConfig {
+      ourServicesPreamble {
+        document
+      }
+    }
+  }
+`;
 
 const items = [
   {
@@ -51,6 +65,15 @@ const items = [
 ];
 
 export default function Services() {
+  const { data } = useQuery(GET_SERVICE_PREAMBLE);
+  const [preamble, setPreamble] = React.useState<DocumentRendererProps['document']>();
+
+  React.useEffect(() => {
+    if (data) {
+      setPreamble(data.siteConfig.ourServicesPreamble.document);
+    }
+  }, [data]);
+
   return (
     <Box
       id='services'
@@ -80,12 +103,7 @@ export default function Services() {
           <Typography fontFamily='Times New Roman, serif' component='h2' variant='h4'>
             Våra tjänster
           </Typography>
-          <Typography variant='body1' sx={{ color: 'grey.400' }}>
-            Vi erbjuder skräddarsydda lösningar för alla dina utomhusprojekt. Med vår
-            erfarenhet och expertis kan vi hjälpa dig att skapa det perfekta
-            utomhusutrymmet. <br />
-            Kontakta oss idag för att ta reda på hur vi kan hjälpa dig!
-          </Typography>
+          {preamble && <DocumentRenderer document={preamble} />}
         </Box>
         <Grid container spacing={2.5}>
           {items.map((item, index) => (
