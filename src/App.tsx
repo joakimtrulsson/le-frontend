@@ -15,6 +15,7 @@ import Footer from './components/Footer';
 import Projects from './components/Projects';
 import Services from './components/Services';
 import Reviews from './components/Reviews';
+import OurPartners from './components/OurPartners';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -36,6 +37,8 @@ function App() {
         <NavBar mode={mode} toggleLightDarkMode={toggleLightDarkMode} />
         <Hero mode={mode} />
         <Box sx={{ bgcolor: 'background.default' }}>
+          <OurPartners mode={mode} />
+          <Divider />
           <Products />
           <Divider />
           <Projects />

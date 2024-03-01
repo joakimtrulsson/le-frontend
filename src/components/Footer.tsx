@@ -159,14 +159,15 @@ export default function Footer({ mode }: FooterProps) {
         >
           <IconButton
             color='inherit'
-            href='https://www.facebook.com/'
+            href='https://www.facebook.com/L.EEntreprenadByggservice/'
             aria-label='Facebook'
+            target='_blank'
           >
             <FacebookIcon />
           </IconButton>
           <IconButton
             color='inherit'
-            href='https://www.instagram.com'
+            href='https://www.instagram.com/l.eentreprenadochbyggservice/'
             aria-label='Instagram'
           >
             <InstagramIcon />
