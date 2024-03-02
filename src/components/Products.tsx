@@ -6,9 +6,13 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import useCartStore from '../store/cart';
+import Product from '../types/Product';
+
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 
 import { useQuery, gql } from '@apollo/client';
+import { Button } from '@mui/material';
 
 const GET_PRODUCTS = gql`
   query Query($where: ProductWhereInput!) {
@@ -32,19 +36,6 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-interface Product {
-  id: string;
-  productTitle: string;
-  description: string;
-  price: number;
-  priceUnit: string;
-  productImage: {
-    url: string;
-  };
-  discountPrice: number;
-  recommendedProduct: boolean;
-}
-
 export default function Products() {
   const { data } = useQuery(GET_PRODUCTS, {
     variables: {
@@ -64,6 +55,7 @@ export default function Products() {
   });
   const [products, setProducts] = React.useState<Product[]>([]);
   const [preamble, setPreamble] = React.useState<DocumentRendererProps['document']>();
+  const { addItemToCart } = useCartStore();
 
   React.useEffect(() => {
     if (data) {
@@ -71,6 +63,10 @@ export default function Products() {
       setPreamble(data.siteConfig.productsPreamble.document);
     }
   }, [data]);
+
+  const onAddToCart = (product: Product) => {
+    addItemToCart(product);
+  };
 
   return (
     <Box
@@ -128,7 +124,10 @@ export default function Products() {
                 <Box
                   id='image'
                   sx={{
-                    alignSelf: 'center',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    alignItems: 'flex-end',
+                    // alignSelf: 'center',
                     height: { xs: 250, sm: 275 },
                     width: '100%',
                     backgroundImage: item.productImage
@@ -136,7 +135,17 @@ export default function Products() {
                       : '',
                     backgroundSize: 'cover',
                   }}
-                />
+                >
+                  <Button
+                    size='small'
+                    variant='contained'
+                    color='primary'
+                    sx={{ mb: 1, mr: 1 }}
+                    onClick={() => onAddToCart(item)}
+                  >
+                    Lägg till i varukorg
+                  </Button>
+                </Box>
                 <Box sx={{ px: 2, py: 2 }}>
                   <Typography component='h3' variant='h6' gutterBottom>
                     {item.productTitle}

@@ -16,6 +16,7 @@ import Projects from './components/Projects';
 import Services from './components/Services';
 import Reviews from './components/Reviews';
 import OurPartners from './components/OurPartners';
+import ShoppingCart from './components/ShoppingCart';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -49,6 +50,7 @@ function App() {
           <Divider />
           <Footer mode={mode} />
         </Box>
+        <ShoppingCart />
       </ThemeProvider>
     </ApolloProvider>
   );
