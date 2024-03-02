@@ -6,16 +6,11 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
-import { PaletteMode } from '@mui/material';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
-
-import Forms from './Forms';
+import ThemeModeProps from '../types/ThemeModeProps';
+import { Forms } from './';
 
 import { useQuery, gql } from '@apollo/client';
-
-interface HeroProps {
-  mode: PaletteMode;
-}
 
 const GET_HERO = gql`
   query SiteConfig {
@@ -38,7 +33,7 @@ const logoStyle = {
   fontColor: 'red',
 };
 
-export default function Hero({ mode }: HeroProps) {
+export default function Hero({ mode }: ThemeModeProps) {
   const { data } = useQuery(GET_HERO);
   const [tempSiteConfig, setTempSiteConfig] = React.useState<{
     siteTitle: string;

@@ -10,6 +10,7 @@ import Masonry from '@mui/lab/Masonry';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useMediaQuery } from '@mui/material';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
+import Review from '../types/Review';
 
 import { useQuery, gql } from '@apollo/client';
 
@@ -30,18 +31,10 @@ const GET_REWIEWS = gql`
   }
 `;
 
-interface Reviews {
-  id: string;
-  reviewBy: string;
-  reviewText: string;
-  location: string;
-  date: string;
-}
-
 export default function Reviews() {
   const isSmallScreen = useMediaQuery('(max-width:600px)');
   const columns = isSmallScreen ? 1 : 3;
-  const [reviews, setReviews] = React.useState<Reviews[]>([]);
+  const [reviews, setReviews] = React.useState<Review[]>([]);
   const [preamble, setPreamble] = React.useState<DocumentRendererProps['document']>();
   const [isLoaded, setIsLoaded] = React.useState(false);
   const { data } = useQuery(GET_REWIEWS, {

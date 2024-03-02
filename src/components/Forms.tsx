@@ -10,13 +10,9 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SendIcon from '@mui/icons-material/Send';
-import { PaletteMode } from '@mui/material';
+import ThemeModeProps from '../types/ThemeModeProps';
 
-interface FormProps {
-  mode: PaletteMode;
-}
-
-export default function FormDialog({ mode }: FormProps) {
+export default function FormDialog({ mode }: ThemeModeProps) {
   const [open, setOpen] = React.useState(false);
   const [errorAlert, setErrorAlert] = React.useState(false);
   const [successAlert, setSuccessAlert] = React.useState(false);

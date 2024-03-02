@@ -103,7 +103,9 @@ export default function Services() {
           <Typography fontFamily='Times New Roman, serif' component='h2' variant='h4'>
             Våra tjänster
           </Typography>
-          {preamble && <DocumentRenderer document={preamble} />}
+          <Box sx={{ color: 'grey.400' }}>
+            {preamble && <DocumentRenderer document={preamble} />}
+          </Box>
         </Box>
         <Grid container spacing={2.5}>
           {items.map((item, index) => (

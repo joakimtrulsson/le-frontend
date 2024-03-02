@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PaletteMode } from '@mui/material';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,13 +12,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ToggleLightDarkMode from './ToggleLightDarkMode';
 import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
+import NavBarProps from '../types/NavBarProps';
 
-import Forms from './Forms';
-
-interface NavBarProps {
-  mode: PaletteMode;
-  toggleLightDarkMode: () => void;
-}
+import { Forms } from './';
 
 const logoStyle = {
   width: '36px',

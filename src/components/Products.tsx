@@ -6,13 +6,12 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
+import { Button } from '@mui/material';
+import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 import useCartStore from '../store/cart';
 import Product from '../types/Product';
 
-import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
-
 import { useQuery, gql } from '@apollo/client';
-import { Button } from '@mui/material';
 
 const GET_PRODUCTS = gql`
   query Query($where: ProductWhereInput!) {
@@ -101,9 +100,9 @@ export default function Products() {
           >
             Våra produkter
           </Typography>
-          <Typography variant='body1' sx={{ color: 'grey.400' }}>
+          <Box sx={{ color: 'grey.400' }}>
             {preamble && <DocumentRenderer document={preamble} />}
-          </Typography>
+          </Box>
         </Box>
         <Grid container spacing={2.5}>
           {products.map((item: Product, index: number) => (

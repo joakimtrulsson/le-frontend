@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Divider, Pagination } from '@mui/material';
+import Project from '../types/Project';
 
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 
@@ -38,19 +39,6 @@ const GET_PROJECTS = gql`
   }
 `;
 
-interface Projects {
-  id: string;
-  projectTitle: string;
-  shortDescription: string;
-  fullDescription: string;
-  projectImage: {
-    url: string;
-  };
-  location: string;
-  icon: string;
-  date: string;
-}
-
 const projectsPerPage = 3;
 
 export default function Projects() {
@@ -64,7 +52,7 @@ export default function Projects() {
       ],
     },
   });
-  const [projects, setProjects] = React.useState<Projects[]>([]);
+  const [projects, setProjects] = React.useState<Project[]>([]);
   const [preamble, setPreamble] = React.useState<DocumentRendererProps['document']>();
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [page, setPage] = React.useState(1);

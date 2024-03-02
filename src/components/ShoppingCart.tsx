@@ -21,7 +21,7 @@ import { ShoppingBag } from '@mui/icons-material';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 
 import useCartStore from '../store/cart';
-import Checkout from './Checkout';
+import { Checkout } from './';
 
 const StyledBadge = styled(Badge)<BadgeProps>(() => ({
   '& .MuiBadge-badge': {
@@ -95,19 +95,15 @@ function ShoppingCart() {
             })}
           >
             <Box>
-              <Button
-                variant='text'
-                color='primary'
-                aria-label='menu'
+              <IconButton
+                aria-label='cart'
                 onClick={toggleDrawer(true)}
                 sx={{ minWidth: '30px', p: '4px' }}
               >
-                <IconButton aria-label='cart'>
-                  <StyledBadge badgeContent={totalQuantity} color='primary'>
-                    <ShoppingBag />
-                  </StyledBadge>
-                </IconButton>
-              </Button>
+                <StyledBadge badgeContent={totalQuantity} color='primary'>
+                  <ShoppingBag />
+                </StyledBadge>
+              </IconButton>
               <Drawer anchor='bottom' open={open} onClose={toggleDrawer(false)}>
                 <Box
                   sx={{

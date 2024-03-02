@@ -1,8 +1,6 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import { PaletteMode } from '@mui/material';
-
 import meWhiteLogo from '../assets/partners/me/me-transparent-white.png';
 import meGreyLogo from '../assets/partners/me/me-transparent-grey.png';
 import sekoWhiteLogo from '../assets/partners/seko/seko-white-transparent.png';
@@ -11,10 +9,7 @@ import idGreyLogo from '../assets/partners/id06/id06-grey.png';
 import idWhiteLogo from '../assets/partners/id06/id06-white.png';
 import energyWhiteLogo from '../assets/partners/energi/energi-white.png';
 import energyGreyLogo from '../assets/partners/energi/energi-grey.png';
-
-interface OurPartnerProps {
-  mode: PaletteMode;
-}
+import ThemeModeProps from '../types/ThemeModeProps';
 
 const logoStyle = {
   height: '40px',
@@ -26,7 +21,7 @@ const logoStyleID06 = {
   margin: '0 32px',
 };
 
-export default function OurParterns({ mode }: OurPartnerProps) {
+export default function OurParterns({ mode }: ThemeModeProps) {
   return (
     <Box id='ourpartners' sx={{ py: 4 }}>
       <Typography

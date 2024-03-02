@@ -4,17 +4,12 @@ import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { PaletteMode } from '@mui/material';
-
 import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
-
-interface FooterProps {
-  mode: PaletteMode;
-}
+import ThemeModeProps from '../types/ThemeModeProps';
 
 function Copyright() {
   return (
@@ -33,7 +28,7 @@ const logoStyle = {
   fontColor: 'red',
 };
 
-export default function Footer({ mode }: FooterProps) {
+export default function Footer({ mode }: ThemeModeProps) {
   const scrollToSection = (sectionId: string) => {
     const sectionElement = document.getElementById(sectionId);
     const offset = 50;

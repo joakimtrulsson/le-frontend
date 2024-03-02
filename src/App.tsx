@@ -8,15 +8,17 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 import getLightDarkTheme from './getLightDarkTheme';
 
-import NavBar from './components/NavBar';
-import Hero from './components/Hero';
-import Products from './components/Products';
-import Footer from './components/Footer';
-import Projects from './components/Projects';
-import Services from './components/Services';
-import Reviews from './components/Reviews';
-import OurPartners from './components/OurPartners';
-import ShoppingCart from './components/ShoppingCart';
+import {
+  NavBar,
+  Hero,
+  Products,
+  Footer,
+  Projects,
+  Services,
+  Reviews,
+  OurPartners,
+  ShoppingCart,
+} from './components';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
