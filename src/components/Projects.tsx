@@ -330,6 +330,7 @@ export default function Projects() {
                   sx={{
                     mb: 1,
                     height: '300px',
+                    lazyLoad: 'none',
                     backgroundImage: selectedFeature.projectImage
                       ? `url(${selectedFeature.projectImage.url})`
                       : '',
