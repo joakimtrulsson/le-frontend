@@ -6,8 +6,10 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
-import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
+import { DocumentRenderer } from '@keystone-6/document-renderer';
+import Carousel from 'react-material-ui-carousel';
 import ThemeModeProps from '../types/ThemeModeProps';
+import HeroData from '../types/HeroData';
 import { Forms } from './';
 
 import { useQuery, gql } from '@apollo/client';
@@ -19,7 +21,16 @@ const GET_HERO = gql`
       heroPreamble {
         document
       }
-      heroImage {
+      heroImage1 {
+        url
+      }
+      heroImage2 {
+        url
+      }
+      heroImage3 {
+        url
+      }
+      heroImage4 {
         url
       }
     }
@@ -35,78 +46,87 @@ const logoStyle = {
 
 export default function Hero({ mode }: ThemeModeProps) {
   const { data } = useQuery(GET_HERO);
-  const [tempSiteConfig, setTempSiteConfig] = React.useState<{
-    siteTitle: string;
-    heroPreamble: DocumentRendererProps['document'];
-    heroImage: string;
-  } | null>(null);
+  const [heroData, setHeroData] = React.useState<HeroData>();
 
   React.useEffect(() => {
     if (data) {
-      const newSiteConfig = {
+      const newSiteConfig: HeroData = {
         siteTitle: data.siteConfig?.siteTitle,
         heroPreamble: data.siteConfig?.heroPreamble?.document,
-        heroImage: data.siteConfig?.heroImage?.url,
+        heroImages: [
+          data.siteConfig?.heroImage1?.url,
+          data.siteConfig?.heroImage2?.url,
+          data.siteConfig?.heroImage3?.url,
+          data.siteConfig?.heroImage4?.url,
+        ].filter(Boolean),
       };
-      setTempSiteConfig(newSiteConfig);
+      setHeroData(newSiteConfig);
     }
   }, [data]);
 
   return (
     <Box
       id='hero'
-      sx={(theme) => ({
+      sx={() => ({
         width: '100%',
         backgroundImage:
-          theme.palette.mode === 'light'
+          mode === 'light'
             ? 'linear-gradient(180deg, #CEE5FD, #FFF)'
             : 'linear-gradient(#02294F, #090E10)',
         backgroundSize: '100% 20%',
         backgroundRepeat: 'no-repeat',
       })}
     >
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'row', md: 'row' },
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: { xs: 1, sm: 1 },
+          alignSelf: { xs: 'center', sm: 'flex-start' },
+          textAlign: { xs: 'center', sm: 'center' },
+          pt: { xs: 12, sm: 14 },
+        }}
+      >
+        <Box>
+          <img
+            src={mode === 'light' ? lightLogo : darkLogo}
+            style={logoStyle}
+            alt='logo of le entreprenad'
+          />
+        </Box>
+        {heroData && (
+          <Typography
+            component='h1'
+            variant='h5'
+            sx={{
+              fontFamily: 'Times New Roman, Serif',
+              fontWeight: '600',
+              color: 'text.secondary',
+            }}
+          >
+            {heroData.siteTitle}
+          </Typography>
+        )}
+      </Box>
       <Container
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          pt: { xs: 14, sm: 20 },
-          pb: { xs: 8, sm: 12 },
+          flexDirection: { xs: 'column', sm: 'column', md: 'row' },
+          pt: { xs: 2, sm: 4 },
+          pb: { xs: 4, sm: 12 },
         }}
       >
-        <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'column' },
-              alignSelf: 'center',
-              textAlign: 'center',
-            }}
-          >
-            <Box>
-              <img
-                src={mode === 'light' ? lightLogo : darkLogo}
-                style={logoStyle}
-                alt='logo of le entreprenad'
-              />
-            </Box>
-            {tempSiteConfig && (
-              <Typography
-                variant='h5'
-                sx={{
-                  fontFamily: 'Times New Roman, Serif',
-                  fontWeight: '600',
-                  color: 'text.secondary',
-                }}
-              >
-                Entreprenad & Byggservice
-              </Typography>
-            )}
-          </Box>
-
-          {tempSiteConfig && (
+        <Stack
+          sx={{
+            width: { xs: '100%', sm: '100%' },
+            order: { xs: 2, sm: 2, md: 1 }, // change order here
+          }}
+        >
+          {heroData && (
             <Box color='text.secondary'>
-              <DocumentRenderer document={tempSiteConfig.heroPreamble} />
+              <DocumentRenderer document={heroData.heroPreamble} />
             </Box>
           )}
           <Stack
@@ -119,28 +139,35 @@ export default function Hero({ mode }: ThemeModeProps) {
             <Forms mode={mode} />
           </Stack>
         </Stack>
-        {tempSiteConfig && (
-          <Box
-            id='image'
-            sx={(theme) => ({
-              mt: { xs: 6, sm: 8 },
-              alignSelf: 'center',
-              height: { xs: 250, sm: 700 },
+        {heroData && (
+          <Carousel
+            autoPlay={true}
+            navButtonsAlwaysVisible
+            indicators={false}
+            sx={{
+              mt: { xs: 2, sm: 1, md: 0 },
+              mb: { xs: 1, sm: 2, md: 0 },
               width: '100%',
-              backgroundImage: tempSiteConfig ? `url(${tempSiteConfig.heroImage})` : '',
-              backgroundSize: 'cover',
               borderRadius: '10px',
               outline: '1px solid',
-              outlineColor:
-                theme.palette.mode === 'light'
-                  ? alpha('#BFCCD9', 0.5)
-                  : alpha('#9CCCFC', 0.1),
-              boxShadow:
-                theme.palette.mode === 'light'
-                  ? `0 0 12px 8px ${alpha('#9CCCFC', 0.2)}`
-                  : `0 0 24px 12px ${alpha('#033363', 0.2)}`,
-            })}
-          />
+              outlineColor: alpha('#9CCCFC', 0.1),
+              boxShadow: `0 0 24px 12px ${alpha('#033363', 0.3)}`,
+              order: { xs: 1, sm: 1, md: 2 }, // change order here
+            }}
+          >
+            {heroData.heroImages.map((imageUrl, index) => (
+              <Box
+                key={index}
+                id={`hero-image-${index}`}
+                sx={{
+                  height: { xs: 250, sm: 500 },
+                  backgroundImage: imageUrl ? `url(${imageUrl})` : '',
+                  backgroundSize: 'cover',
+                  borderRadius: '10px',
+                }}
+              />
+            ))}
+          </Carousel>
         )}
       </Container>
     </Box>
