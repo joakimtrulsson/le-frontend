@@ -51,7 +51,9 @@ function ShoppingCart() {
     setOpen(newOpen);
   };
 
-  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const cartQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+  const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <div>
@@ -99,7 +101,7 @@ function ShoppingCart() {
                 onClick={toggleDrawer(true)}
                 sx={{ minWidth: '30px', p: '4px' }}
               >
-                <StyledBadge badgeContent={totalQuantity} color='primary'>
+                <StyledBadge badgeContent={cartQuantity} color='primary'>
                   <ShoppingBag />
                 </StyledBadge>
               </IconButton>
@@ -160,6 +162,11 @@ function ShoppingCart() {
                             </ListItem>
                           ))}
                         </List>
+                        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                          <Typography variant='h6' color='textSecondary'>
+                            Total: {cartTotal} kr
+                          </Typography>
+                        </Box>
                         <Divider />
                         <Box sx={{ display: 'flex', justifyContent: 'center', pt: 1 }}>
                           <Checkout />
