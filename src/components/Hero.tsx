@@ -125,7 +125,7 @@ export default function Hero({ mode }: ThemeModeProps) {
           }}
         >
           {heroData && (
-            <Box color='text.secondary'>
+            <Box color='text.secondary' sx={{ mr: { md: 3 } }}>
               <DocumentRenderer document={heroData.heroPreamble} />
             </Box>
           )}
