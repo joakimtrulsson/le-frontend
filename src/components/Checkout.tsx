@@ -18,6 +18,8 @@ function Checkout({ mode }: ThemeModeProps) {
   const [loading, setLoading] = React.useState(false);
   const [errorAlert, setErrorAlert] = React.useState(false);
   const { cartItems } = useCartStore();
+  const CHECKOUT_URL = import.meta.env.VITE_CHECKOUT_URL;
+  const CHECKOUT_TOKEN = import.meta.env.VITE_CHECKOUT_TOKEN;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,10 +32,9 @@ function Checkout({ mode }: ThemeModeProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
+    console.log();
     const formData = new FormData(event.currentTarget);
     const formJson = Object.fromEntries((formData as FormData).entries());
-    const CHECKOUT_URL = import.meta.env.VITE_CHECKOUT_URL;
-    const CHECKOUT_TOKEN = import.meta.env.VITE_CHECKOUT_TOKEN;
 
     const order = {
       products: cartItems.map((item) => ({
@@ -42,13 +43,14 @@ function Checkout({ mode }: ThemeModeProps) {
       })),
       customerData: formJson,
     };
-
+    console.log(CHECKOUT_TOKEN);
     try {
       const response = await fetch(CHECKOUT_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${CHECKOUT_TOKEN}`,
+          credentials: 'include',
         },
         body: JSON.stringify(order),
       });
@@ -58,7 +60,7 @@ function Checkout({ mode }: ThemeModeProps) {
         setErrorAlert(true);
         throw new Error('Något gick fel vid beställningen. Försök igen.');
       }
-
+      console.log(response);
       const data = await response.json();
 
       window.location.href = data.session.url;
