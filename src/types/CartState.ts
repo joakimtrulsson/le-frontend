@@ -1,5 +1,5 @@
-import Product from './Product';
-import CartProduct from './CartProduct';
+import { Product } from './';
+import { CartProduct } from './';
 
 export default interface CartState {
   cartItems: CartProduct[];

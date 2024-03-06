@@ -11,8 +11,7 @@ import Typography from '@mui/material/Typography';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Divider, Pagination } from '@mui/material';
-import Project from '../types/Project';
-
+import { Project } from '../types/';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 
 import { useQuery, gql } from '@apollo/client';

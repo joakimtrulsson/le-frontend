@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
+import { useQueryParams } from './hooks/useQueryParams';
 import getLightDarkTheme from './getLightDarkTheme';
 
 import {
@@ -18,11 +19,21 @@ import {
   Reviews,
   OurPartners,
   ShoppingCart,
+  OrderConfirmation,
+  Error,
 } from './components';
 
 function App() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
   const LightDarkTheme = createTheme(getLightDarkTheme(mode));
+  const { order } = useQueryParams();
+  const [isError, setIsError] = React.useState(false);
+
+  React.useEffect(() => {
+    if (window.location.pathname === '/error') {
+      setIsError(true);
+    }
+  }, []);
 
   const client = new ApolloClient({
     uri: import.meta.env.VITE_API_URL,
@@ -38,6 +49,8 @@ function App() {
       <ThemeProvider theme={LightDarkTheme}>
         <CssBaseline />
         <NavBar mode={mode} toggleLightDarkMode={toggleLightDarkMode} />
+        {order && <OrderConfirmation orderId={order} />}
+        {isError && <Error />}
         <Hero mode={mode} />
         <Box sx={{ bgcolor: 'background.default' }}>
           <OurPartners mode={mode} />
@@ -52,7 +65,7 @@ function App() {
           <Divider />
           <Footer mode={mode} />
         </Box>
-        <ShoppingCart />
+        <ShoppingCart mode={mode} />
       </ThemeProvider>
     </ApolloProvider>
   );

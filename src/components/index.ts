@@ -11,4 +11,5 @@ export { default as ShoppingCart } from './ShoppingCart';
 export { default as ShoppingCartButton } from './ShoppingCartButton';
 export { default as Hero } from './Hero';
 export { default as OurPartners } from './OurPartners';
-// export {default as Offers} from './Offers';
+export { default as OrderConfirmation } from './OrderConfirmation';
+export { default as Error } from './Error';

@@ -6,9 +6,18 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SendIcon from '@mui/icons-material/Send';
+import useCartStore from '../store/cart';
+import { ThemeModeProps } from '../types/';
 
-function Checkout() {
+function Checkout({ mode }: ThemeModeProps) {
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [errorAlert, setErrorAlert] = React.useState(false);
+  const { cartItems } = useCartStore();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -18,8 +27,52 @@ function Checkout() {
     setOpen(false);
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    const formData = new FormData(event.currentTarget);
+    const formJson = Object.fromEntries((formData as FormData).entries());
+    const CHECKOUT_URL = import.meta.env.VITE_CHECKOUT_URL;
+    const CHECKOUT_TOKEN = import.meta.env.VITE_CHECKOUT_TOKEN;
+
+    const order = {
+      products: cartItems.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+      })),
+      customerData: formJson,
+    };
+
+    try {
+      const response = await fetch(CHECKOUT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${CHECKOUT_TOKEN}`,
+        },
+        body: JSON.stringify(order),
+      });
+
+      if (!response.ok) {
+        console.log(response);
+        setErrorAlert(true);
+        throw new Error('Något gick fel vid beställningen. Försök igen.');
+      }
+
+      const data = await response.json();
+
+      window.location.href = data.session.url;
+    } catch (error) {
+      console.error('Error:', error);
+      setErrorAlert(true);
+    } finally {
+      setLoading(false);
+      setErrorAlert(false);
+    }
+  };
+
   return (
-    <React.Fragment>
+    <>
       <Button variant='outlined' size='small' onClick={handleClickOpen}>
         Checkout
       </Button>
@@ -28,14 +81,7 @@ function Checkout() {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            // const formData = new FormData(event.currentTarget);
-            // const formJson = Object.fromEntries((formData as any).entries());
-
-            alert('To be implemented');
-            handleClose();
-          },
+          onSubmit: (event: React.FormEvent<HTMLFormElement>) => handleSubmit(event),
         }}
       >
         <DialogTitle>Checkout</DialogTitle>
@@ -47,8 +93,8 @@ function Checkout() {
             autoFocus
             required
             margin='dense'
-            id='name'
-            name='name'
+            id='customerName'
+            name='customerName'
             label='Ditt namn'
             type='text'
             fullWidth
@@ -58,8 +104,8 @@ function Checkout() {
             autoFocus
             required
             margin='dense'
-            id='email'
-            name='email'
+            id='customerEmail'
+            name='customerEmail'
             label='Email Address'
             type='email'
             fullWidth
@@ -69,8 +115,8 @@ function Checkout() {
             autoFocus
             required
             margin='dense'
-            id='email'
-            name='email'
+            id='number'
+            name='number'
             label='Telefonnummer'
             type='number'
             fullWidth
@@ -81,12 +127,48 @@ function Checkout() {
           <Button size='small' variant='outlined' onClick={handleClose}>
             Cancel
           </Button>
-          <Button size='small' variant='contained' type='submit'>
-            Gå vidare till betalning
-          </Button>
+          <LoadingButton
+            size='small'
+            type='submit'
+            // onClick={handleClick}
+            endIcon={<SendIcon />}
+            loading={loading}
+            loadingPosition='end'
+            variant='contained'
+            color='primary'
+          >
+            <span>Gå vidare till betalningen</span>
+          </LoadingButton>
         </DialogActions>
+        <Stack sx={{ px: 2, py: 1, width: '100%' }} spacing={2}>
+          {errorAlert && (
+            <Alert
+              sx={{
+                border: '1px solid #ef5351',
+                color: '#ef5351',
+                bgcolor: mode === 'light' ? '#fff' : '',
+              }}
+              severity='error'
+            >
+              Något gick fel! Försök igen.
+            </Alert>
+          )}
+
+          {loading && (
+            <Alert
+              sx={{
+                border: '1px solid #65c364',
+                color: '#65c364',
+                bgcolor: mode === 'light' ? '#fff' : '',
+              }}
+              severity='success'
+            >
+              Du skickas snart vidare till Stripe för betalning.
+            </Alert>
+          )}
+        </Stack>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 }
 

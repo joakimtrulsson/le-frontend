@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider';
 import { Button } from '@mui/material';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 import useCartStore from '../store/cart';
-import Product from '../types/Product';
+import { Product } from '../types/';
 
 import { useQuery, gql } from '@apollo/client';
 

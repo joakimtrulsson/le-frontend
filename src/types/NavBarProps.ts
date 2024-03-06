@@ -1,4 +1,4 @@
-import ThemeModeProps from './ThemeModeProps';
+import { ThemeModeProps } from './';
 
 type NavBarProps = ThemeModeProps & {
   toggleLightDarkMode: () => void;

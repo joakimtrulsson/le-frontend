@@ -6,10 +6,9 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
-import { DocumentRenderer } from '@keystone-6/document-renderer';
 import Carousel from 'react-material-ui-carousel';
-import ThemeModeProps from '../types/ThemeModeProps';
-import HeroData from '../types/HeroData';
+import { DocumentRenderer } from '@keystone-6/document-renderer';
+import { ThemeModeProps, HeroData } from '../types/';
 import { Forms } from './';
 
 import { useQuery, gql } from '@apollo/client';
@@ -121,7 +120,7 @@ export default function Hero({ mode }: ThemeModeProps) {
         <Stack
           sx={{
             width: { xs: '100%', sm: '100%' },
-            order: { xs: 2, sm: 2, md: 1 }, // change order here
+            order: { xs: 2, sm: 2, md: 1 },
           }}
         >
           {heroData && (
@@ -152,7 +151,7 @@ export default function Hero({ mode }: ThemeModeProps) {
               outline: '1px solid',
               outlineColor: alpha('#9CCCFC', 0.1),
               boxShadow: `0 0 24px 12px ${alpha('#033363', 0.3)}`,
-              order: { xs: 1, sm: 1, md: 2 }, // change order here
+              order: { xs: 1, sm: 1, md: 2 },
             }}
           >
             {heroData.heroImages.map((imageUrl, index) => (

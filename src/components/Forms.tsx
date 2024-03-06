@@ -10,7 +10,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SendIcon from '@mui/icons-material/Send';
-import ThemeModeProps from '../types/ThemeModeProps';
+import { ThemeModeProps } from '../types/';
 
 export default function FormDialog({ mode }: ThemeModeProps) {
   const [open, setOpen] = React.useState(false);
@@ -29,7 +29,7 @@ export default function FormDialog({ mode }: ThemeModeProps) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Button variant='contained' color='primary' onClick={handleClickOpen}>
         Kontakta oss
       </Button>
@@ -179,6 +179,6 @@ export default function FormDialog({ mode }: ThemeModeProps) {
           )}
         </Stack>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 }

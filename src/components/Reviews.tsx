@@ -10,7 +10,7 @@ import Masonry from '@mui/lab/Masonry';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useMediaQuery } from '@mui/material';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
-import Review from '../types/Review';
+import { Review } from '../types/';
 
 import { useQuery, gql } from '@apollo/client';
 
