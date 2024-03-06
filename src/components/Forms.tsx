@@ -60,7 +60,7 @@ export default function FormDialog({ mode }: ThemeModeProps) {
 
               if (!data.success) {
                 setErrorAlert(true);
-                console.log(data);
+
                 return;
               }
 

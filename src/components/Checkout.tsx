@@ -32,7 +32,7 @@ function Checkout({ mode }: ThemeModeProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    console.log();
+
     const formData = new FormData(event.currentTarget);
     const formJson = Object.fromEntries((formData as FormData).entries());
 
@@ -43,7 +43,7 @@ function Checkout({ mode }: ThemeModeProps) {
       })),
       customerData: formJson,
     };
-    console.log(CHECKOUT_TOKEN);
+
     try {
       const response = await fetch(CHECKOUT_URL, {
         method: 'POST',
@@ -56,11 +56,10 @@ function Checkout({ mode }: ThemeModeProps) {
       });
 
       if (!response.ok) {
-        console.log(response);
         setErrorAlert(true);
         throw new Error('Något gick fel vid beställningen. Försök igen.');
       }
-      console.log(response);
+
       const data = await response.json();
 
       window.location.href = data.session.url;
