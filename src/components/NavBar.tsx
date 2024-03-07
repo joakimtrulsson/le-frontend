@@ -83,8 +83,6 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 flexGrow: 1,
                 display: 'flex',
                 alignItems: 'center',
-                // ml: '-26px',
-                // mr: 2,
                 px: 0,
               }}
             >
@@ -135,7 +133,7 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
             <Box
               sx={{
                 display: { xs: 'none', md: 'flex' },
-                gap: 0.5,
+                // gap: 0.5,
                 alignItems: 'center',
               }}
             >

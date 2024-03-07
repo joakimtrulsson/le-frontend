@@ -16,7 +16,8 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
-import { ShoppingBag } from '@mui/icons-material';
+import { ShoppingBag, ShoppingBagOutlined } from '@mui/icons-material';
+
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import { ThemeModeProps } from '../types';
 
@@ -76,7 +77,7 @@ function ShoppingCart({ mode }: ThemeModeProps) {
               left: 0,
               right: 0,
               margin: 'auto',
-              width: '68px',
+              width: '110px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -103,7 +104,7 @@ function ShoppingCart({ mode }: ThemeModeProps) {
                 sx={{ minWidth: '30px', p: '4px' }}
               >
                 <StyledBadge badgeContent={cartQuantity} color='primary'>
-                  <ShoppingBag />
+                  <ShoppingBag fontSize='large' />
                 </StyledBadge>
               </IconButton>
               <Drawer anchor='bottom' open={open} onClose={toggleDrawer(false)}>
