@@ -123,15 +123,6 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 </MenuItem>
 
                 <MenuItem
-                  onClick={() => scrollToSection('offers')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant='body2' color='text.primary'>
-                    Erbjudande
-                  </Typography>
-                </MenuItem>
-
-                <MenuItem
                   onClick={() => scrollToSection('reviews')}
                   sx={{ py: '6px', px: '12px' }}
                 >
@@ -195,9 +186,6 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                   </MenuItem>
                   <MenuItem onClick={() => scrollToSection('projects')}>
                     Våra projekt
-                  </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('offers')}>
-                    Erbjudande
                   </MenuItem>
                   <MenuItem onClick={() => scrollToSection('reviews')}>Omdömen</MenuItem>
                   <Divider />

@@ -67,7 +67,6 @@ export default function Footer({ mode }: ThemeModeProps) {
             alt='logo of le entreprenad'
           />
           <Typography
-            // variant='h5'
             sx={{
               ml: 1,
               alignSelf: 'center',
@@ -96,13 +95,6 @@ export default function Footer({ mode }: ThemeModeProps) {
             Produkter
           </Link>
 
-          <Link
-            onClick={() => scrollToSection('offers')}
-            sx={{ cursor: 'pointer' }}
-            color='text.secondary'
-          >
-            Erbjudande
-          </Link>
           <Link
             onClick={() => scrollToSection('projects')}
             sx={{ cursor: 'pointer' }}
