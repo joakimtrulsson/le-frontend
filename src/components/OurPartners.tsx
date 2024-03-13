@@ -9,10 +9,13 @@ import idGreyLogo from '../assets/partners/id06/id06-grey.png';
 import idWhiteLogo from '../assets/partners/id06/id06-white.png';
 import energyWhiteLogo from '../assets/partners/energi/energi-white.png';
 import energyGreyLogo from '../assets/partners/energi/energi-grey.png';
+import prestoWhiteLogo from '../assets/partners/presto/presto-transparent-white.png';
+import prestoGreyLogo from '../assets/partners/presto/presto-transparent-grey.png';
 import ThemeModeProps from '../types/ThemeModeProps';
 
 const logoStyle = {
   height: '40px',
+  width: '120px',
   margin: '0 32px',
 };
 
@@ -36,30 +39,38 @@ export default function OurParterns({ mode }: ThemeModeProps) {
       <Grid
         container
         justifyContent='center'
-        sx={{ mt: 0.5, opacity: mode === 'light' ? 1 : 0.6 }}
+        alignItems='center'
+        sx={{ mt: 0.5, opacity: mode === 'light' ? 1 : 0.6, flexWrap: 'wrap' }}
       >
-        <Grid>
+        <Grid item sx={{ p: 1 }}>
           <img
             src={mode === 'light' ? sekoGreyLogo : sekoWhiteLogo}
             alt='seko logo'
             style={logoStyle}
           />
         </Grid>
-        <Grid>
+        <Grid item sx={{ p: 1 }}>
           <img
             src={mode === 'light' ? meGreyLogo : meWhiteLogo}
             alt='me logo'
             style={logoStyle}
           />
         </Grid>
-        <Grid sx={{ ml: { xs: '-55px', sm: 0 }, mt: { xs: 3, sm: 0 } }}>
+        <Grid item sx={{ p: 1 }}>
           <img
             src={mode === 'light' ? energyGreyLogo : energyWhiteLogo}
             alt='energiföretagen logo'
             style={logoStyle}
           />
         </Grid>
-        <Grid sx={{ display: 'flex', mt: { xs: 3, sm: 0 } }}>
+        <Grid item sx={{ p: 1 }}>
+          <img
+            src={mode === 'light' ? prestoGreyLogo : prestoWhiteLogo}
+            alt='presto logo'
+            style={logoStyle}
+          />
+        </Grid>
+        <Grid item sx={{ p: 1 }}>
           <img
             src={mode === 'light' ? idGreyLogo : idWhiteLogo}
             alt='id06 logo'

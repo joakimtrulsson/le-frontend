@@ -7,7 +7,8 @@ import Typography from '@mui/material/Typography';
 import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
 import Carousel from 'react-material-ui-carousel';
-import { DocumentRenderer } from '@keystone-6/document-renderer';
+import { styled } from '@mui/system';
+import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 import { ThemeModeProps, HeroData } from '../types/';
 import { Forms } from './';
 
@@ -62,6 +63,43 @@ export default function Hero({ mode }: ThemeModeProps) {
       setHeroData(newSiteConfig);
     }
   }, [data]);
+
+  const StyledLink = styled('a')(({ theme }) => ({
+    color: theme.palette.primary.main,
+    fontWeight: 500,
+    position: 'relative',
+    textDecoration: 'none',
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      width: 0,
+      height: '1px',
+      bottom: 0,
+      left: 0,
+      backgroundColor: theme.palette.primary.light,
+      opacity: 0.7,
+      transition: 'width 0.3s ease, opacity 0.3s ease',
+    },
+    '&:hover::before': {
+      width: '100%',
+      opacity: 1,
+    },
+    ...(theme.palette.mode === 'dark' && {
+      color: theme.palette.primary.light,
+    }),
+  }));
+
+  const renderers: DocumentRendererProps['renderers'] = {
+    inline: {
+      link: ({ children, href }) => {
+        return (
+          <StyledLink href={href} target='_blank' rel='noopener noreferrer'>
+            {children}
+          </StyledLink>
+        );
+      },
+    },
+  };
 
   return (
     <Box
@@ -125,7 +163,7 @@ export default function Hero({ mode }: ThemeModeProps) {
         >
           {heroData && (
             <Box color='text.secondary' sx={{ mr: { md: 3 } }}>
-              <DocumentRenderer document={heroData.heroPreamble} />
+              <DocumentRenderer document={heroData.heroPreamble} renderers={renderers} />
             </Box>
           )}
           <Stack
