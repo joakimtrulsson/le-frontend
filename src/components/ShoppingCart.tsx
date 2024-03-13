@@ -55,7 +55,11 @@ function ShoppingCart({ mode }: ThemeModeProps) {
 
   const cartQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const cartTotal = cartItems.reduce(
+    (acc, item) => acc + (item.discountPrice || item.price) * item.quantity,
+    0
+  );
 
   return (
     <div>
@@ -130,12 +134,18 @@ function ShoppingCart({ mode }: ThemeModeProps) {
                         <List>
                           {cartItems.map((item, index) => (
                             <ListItem key={index}>
-                              <ListItemText
-                                primary={item.productTitle}
-                                // secondary={item.description}
-                              />
+                              <ListItemText primary={item.productTitle} />
+                              {item.discountPrice && (
+                                <Typography
+                                  variant='body2'
+                                  color='text.secondary'
+                                  sx={{ textDecoration: 'line-through', mr: 1 }}
+                                >
+                                  {item.price} kr
+                                </Typography>
+                              )}
                               <Typography variant='body2' color='text.secondary'>
-                                {item.price * item.quantity} kr
+                                {item.discountPrice || item.price} kr
                               </Typography>
                               <IconButton
                                 onClick={() => onDecreaseQuantity(item.id)}
@@ -158,7 +168,7 @@ function ShoppingCart({ mode }: ThemeModeProps) {
                                   edge='end'
                                   aria-label='delete'
                                 >
-                                  <RemoveCircleOutlineIcon />
+                                  <RemoveCircleOutlineIcon color='error' />
                                 </IconButton>
                               </ListItemSecondaryAction>
                             </ListItem>

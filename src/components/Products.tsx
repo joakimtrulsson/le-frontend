@@ -25,7 +25,6 @@ const GET_PRODUCTS = gql`
         url
       }
       discountPrice
-      recommendedProduct
     }
     siteConfig {
       productsPreamble {
@@ -42,13 +41,6 @@ export default function Products() {
         status: {
           equals: 'published',
         },
-        AND: [
-          {
-            discountPrice: {
-              equals: null,
-            },
-          },
-        ],
       },
     },
   });
@@ -158,23 +150,45 @@ export default function Products() {
                 <Box
                   sx={{
                     px: 2,
-
-                    backgroundColor: '#161a1c',
                     height: '36px',
                     display: 'flex',
-
                     alignItems: 'center',
                   }}
                 >
-                  <Typography
-                    variant='body2'
-                    sx={{
-                      color: 'grey.400',
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    Pris: {item.price}kr
-                  </Typography>
+                  {item.discountPrice ? (
+                    <>
+                      <Typography
+                        variant='body2'
+                        sx={{
+                          color: 'grey.400',
+                          fontWeight: 'bold',
+                          textDecoration: 'line-through',
+                        }}
+                      >
+                        Pris: {item.price}kr
+                      </Typography>
+                      <Typography
+                        variant='body2'
+                        sx={{
+                          color: 'red',
+                          fontWeight: 'bold',
+                          marginLeft: '10px',
+                        }}
+                      >
+                        Nu: {item.discountPrice}kr
+                      </Typography>
+                    </>
+                  ) : (
+                    <Typography
+                      variant='body2'
+                      sx={{
+                        color: 'grey.400',
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      Pris: {item.price}kr
+                    </Typography>
+                  )}
                   <Divider
                     orientation='vertical'
                     sx={{ mx: 1, color: '#32383f', height: '50%' }}
