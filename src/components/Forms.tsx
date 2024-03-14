@@ -41,7 +41,7 @@ export default function FormDialog({ mode }: ThemeModeProps) {
       },
     });
     const data = await res.json();
-    console.log('verifycaptcha data', data);
+
     return data.success;
   };
 
@@ -55,7 +55,7 @@ export default function FormDialog({ mode }: ThemeModeProps) {
     });
 
     const data = await response.json();
-    console.log('sendEmail data', data);
+
     return data.success;
   };
 
