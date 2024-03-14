@@ -83,7 +83,7 @@ export default function Reviews() {
         >
           Omdömen
         </Typography>
-        <Box sx={{ mb: { xs: 2, sm: 4 } }}>
+        <Box color='text.secondary' sx={{ mb: { xs: 2, sm: 4 } }}>
           {preamble && <DocumentRenderer document={preamble} />}
         </Box>
       </Box>

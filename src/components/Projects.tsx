@@ -93,7 +93,10 @@ export default function Projects() {
               >
                 Projekt
               </Typography>
-              <Box sx={{ mb: { xs: 2, sm: 4 }, textAlign: { xs: 'center' } }}>
+              <Box
+                color='text.secondary'
+                sx={{ mb: { xs: 2, sm: 4 }, textAlign: { xs: 'center' } }}
+              >
                 {preamble && <DocumentRenderer document={preamble} />}
               </Box>
             </div>

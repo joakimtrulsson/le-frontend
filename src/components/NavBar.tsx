@@ -128,6 +128,14 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                     Omdömen
                   </Typography>
                 </MenuItem>
+                <MenuItem
+                  onClick={() => scrollToSection('map')}
+                  sx={{ py: '6px', px: '12px' }}
+                >
+                  <Typography variant='body2' color='text.primary'>
+                    Var finns vi?
+                  </Typography>
+                </MenuItem>
               </Box>
             </Box>
             <Box
@@ -186,6 +194,9 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                     Våra projekt
                   </MenuItem>
                   <MenuItem onClick={() => scrollToSection('reviews')}>Omdömen</MenuItem>
+                  <MenuItem onClick={() => scrollToSection('map')}>
+                    Var finns vi?
+                  </MenuItem>
                   <Divider />
                   <MenuItem>
                     <Forms mode={mode} />

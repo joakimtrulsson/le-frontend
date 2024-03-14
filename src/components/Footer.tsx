@@ -116,6 +116,13 @@ export default function Footer({ mode }: ThemeModeProps) {
           >
             Omdömen
           </Link>
+          <Link
+            onClick={() => scrollToSection('map')}
+            sx={{ cursor: 'pointer' }}
+            color='text.secondary'
+          >
+            Var finns vi?
+          </Link>
           <Link sx={{ cursor: 'pointer' }} color='text.secondary'>
             Kontakta oss
           </Link>
