@@ -10,11 +10,15 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SendIcon from '@mui/icons-material/Send';
-import { ThemeModeProps } from '../types/';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { ThemeModeProps, FormValues } from '../types/';
+import { Box } from '@mui/material';
 
 export default function FormDialog({ mode }: ThemeModeProps) {
+  const recaptcha = React.useRef<ReCAPTCHA>(null);
   const [open, setOpen] = React.useState(false);
   const [errorAlert, setErrorAlert] = React.useState(false);
+  const [errorAlertMessage, setErrorAlertMessage] = React.useState('');
   const [successAlert, setSuccessAlert] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
@@ -28,6 +32,77 @@ export default function FormDialog({ mode }: ThemeModeProps) {
     setOpen(false);
   };
 
+  const verifyCaptcha = async (captchaValue: string) => {
+    const res = await fetch(import.meta.env.VITE_API_VERIFY_TOKEN, {
+      method: 'POST',
+      body: JSON.stringify({ captchaValue }),
+      headers: {
+        'content-type': 'application/json',
+      },
+    });
+    const data = await res.json();
+    return data.success;
+  };
+
+  const sendEmail = async (formJson: FormValues) => {
+    const response = await fetch(import.meta.env.VITE_API_EMAIL_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formJson),
+    });
+
+    const data = await response.json();
+    return data.success;
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const formJson: FormValues = {
+      name: formData.get('name') as string,
+      contactEmail: formData.get('contactEmail') as string,
+      phoneNr: Number(formData.get('phoneNr')),
+      message: formData.get('message') as string,
+    };
+    const captchaValue = recaptcha.current?.getValue();
+
+    setLoading(true);
+
+    if (!captchaValue) {
+      setErrorAlertMessage('Vänligen verifera att du är en människa!');
+      setErrorAlert(true);
+      setLoading(false);
+    } else {
+      const isCaptchaValid = await verifyCaptcha(captchaValue);
+
+      if (isCaptchaValid) {
+        try {
+          const isEmailSent = await sendEmail(formJson);
+
+          if (!isEmailSent) {
+            setErrorAlertMessage('Något gick fel! Försök igen!');
+            setErrorAlert(true);
+            return;
+          }
+
+          setSuccessAlert(true);
+        } catch (error) {
+          console.error(error);
+          setErrorAlert(true);
+        } finally {
+          setErrorAlert(false);
+          setLoading(false);
+        }
+      } else {
+        setErrorAlertMessage('Vänligen verifera att du är en människa!');
+        setErrorAlert(true);
+      }
+    }
+  };
+
   return (
     <>
       <Button variant='contained' color='primary' onClick={handleClickOpen}>
@@ -38,42 +113,7 @@ export default function FormDialog({ mode }: ThemeModeProps) {
         onClose={handleClose}
         PaperProps={{
           component: 'form',
-          onSubmit: async (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            setLoading(true);
-
-            try {
-              const formData = new FormData(event.currentTarget);
-              const formJson = Object.fromEntries((formData as FormData).entries());
-
-              const apiUrl = import.meta.env.VITE_API_EMAIL_URL;
-
-              const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formJson),
-              });
-
-              const data = await response.json();
-
-              if (!data.success) {
-                setErrorAlert(true);
-
-                return;
-              }
-
-              if (data.success) {
-                setSuccessAlert(true);
-              }
-            } catch (error) {
-              console.error(error);
-              setErrorAlert(true);
-            } finally {
-              setLoading(false);
-            }
-          },
+          onSubmit: handleSubmit,
         }}
       >
         <DialogTitle>Kontakta oss</DialogTitle>
@@ -128,6 +168,10 @@ export default function FormDialog({ mode }: ThemeModeProps) {
             multiline={true}
             minRows={3}
           />
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', my: 1 }}>
+            <ReCAPTCHA ref={recaptcha} sitekey={import.meta.env.VITE_APP_SITE_KEY} />
+          </Box>
         </DialogContent>
 
         {!successAlert && (
@@ -161,7 +205,7 @@ export default function FormDialog({ mode }: ThemeModeProps) {
               }}
               severity='error'
             >
-              Något gick fel! Försök igen.
+              {errorAlertMessage}
             </Alert>
           )}
 

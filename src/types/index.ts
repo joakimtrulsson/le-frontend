@@ -8,3 +8,4 @@ export type { default as Product } from './Product';
 export type { default as Project } from './Project';
 export type { default as Review } from './Review';
 export type { default as ThemeModeProps } from './ThemeModeProps';
+export type { default as FormValues } from './FormValues';
