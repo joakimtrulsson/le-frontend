@@ -45,8 +45,8 @@ const logoStyle = {
 };
 
 export default function Hero({ mode }: ThemeModeProps) {
-  const { data } = useQuery(GET_HERO);
   const [heroData, setHeroData] = React.useState<HeroData>();
+  const { data } = useQuery(GET_HERO);
 
   React.useEffect(() => {
     if (data) {

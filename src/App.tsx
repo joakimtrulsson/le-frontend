@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-
 import { useQueryParams } from './hooks/useQueryParams';
 import getLightDarkTheme from './getLightDarkTheme';
 
@@ -29,6 +28,7 @@ function App() {
   const LightDarkTheme = createTheme(getLightDarkTheme(mode));
   const { order } = useQueryParams();
   const [isError, setIsError] = React.useState(false);
+  // const { loadingCount } = useLoadingStore();
 
   React.useEffect(() => {
     if (window.location.pathname === '/error') {

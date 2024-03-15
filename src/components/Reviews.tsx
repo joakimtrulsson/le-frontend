@@ -36,8 +36,7 @@ export default function Reviews() {
   const columns = isSmallScreen ? 1 : 3;
   const [reviews, setReviews] = React.useState<Review[]>([]);
   const [preamble, setPreamble] = React.useState<DocumentRendererProps['document']>();
-  const [isLoaded, setIsLoaded] = React.useState(false);
-  const { data } = useQuery(GET_REWIEWS, {
+  const { loading, data } = useQuery(GET_REWIEWS, {
     variables: {
       orderBy: [
         {
@@ -51,7 +50,6 @@ export default function Reviews() {
     if (data) {
       setReviews(data.reviews);
       setPreamble(data.siteConfig.reviewsPreamble.document);
-      setIsLoaded(true);
     }
   }, [data]);
 
@@ -88,7 +86,7 @@ export default function Reviews() {
         </Box>
       </Box>
       <Masonry columns={columns} spacing={2}>
-        {isLoaded ? (
+        {!loading ? (
           reviews.map((review, index) => (
             <Card key={index} sx={{ p: 1 }}>
               <CardContent>

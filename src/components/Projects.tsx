@@ -42,7 +42,7 @@ const projectsPerPage = 3;
 
 export default function Projects() {
   const [selectedItemIndex, setSelectedItemIndex] = React.useState(0);
-  const { data } = useQuery(GET_PROJECTS, {
+  const { loading, data } = useQuery(GET_PROJECTS, {
     variables: {
       orderBy: [
         {
@@ -53,7 +53,6 @@ export default function Projects() {
   });
   const [projects, setProjects] = React.useState<Project[]>([]);
   const [preamble, setPreamble] = React.useState<DocumentRendererProps['document']>();
-  const [isLoaded, setIsLoaded] = React.useState(false);
   const [page, setPage] = React.useState(1);
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -68,7 +67,6 @@ export default function Projects() {
     if (data) {
       setProjects(data.projects);
       setPreamble(data.siteConfig.projectsPreamble.document);
-      setIsLoaded(true);
     }
   }, [data]);
 
@@ -80,7 +78,7 @@ export default function Projects() {
 
   return (
     <Container id='projects' sx={{ py: { xs: 8, sm: 16 } }}>
-      {isLoaded ? (
+      {!loading && selectedFeature ? (
         <Grid container spacing={6}>
           <Grid item xs={12} md={6}>
             <div>
@@ -135,6 +133,7 @@ export default function Projects() {
                 />
               ))}
             </Grid>
+
             <Box
               component={Card}
               variant='outlined'
