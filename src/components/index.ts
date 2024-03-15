@@ -13,3 +13,4 @@ export { default as OurPartners } from './OurPartners';
 export { default as OrderConfirmation } from './OrderConfirmation';
 export { default as Error } from './Error';
 export { default as Map } from './Map';
+export { default as ProductCard } from './ProductCard';
