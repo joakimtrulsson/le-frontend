@@ -90,6 +90,7 @@ function NavBar({ mode, toggleLightDarkMode }: NavBarProps) {
                 src={mode === 'light' ? lightLogo : darkLogo}
                 style={logoStyle}
                 alt='logo of le entreprenad'
+                onClick={() => scrollToSection('hero')}
               />
 
               <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
