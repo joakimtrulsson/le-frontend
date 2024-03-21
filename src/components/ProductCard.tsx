@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
@@ -5,8 +6,11 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { Button } from '@mui/material';
 import ProductCardProps from '../types/ProductCard';
+import { CartContext } from '../context/CartContext';
 
-export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
+  const { addProductToCart } = React.useContext(CartContext);
+
   return (
     <Stack
       direction='column'
@@ -45,7 +49,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           variant='contained'
           color='primary'
           sx={{ mb: 1, mr: 1 }}
-          onClick={() => onAddToCart(product)}
+          onClick={() => addProductToCart(product)}
         >
           Lägg till i varukorg
         </Button>

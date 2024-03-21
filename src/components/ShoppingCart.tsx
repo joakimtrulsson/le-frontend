@@ -1,10 +1,9 @@
 import * as React from 'react';
-
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
+
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -20,8 +19,10 @@ import { ShoppingBag } from '@mui/icons-material';
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import { ThemeModeProps } from '../types';
 
-import useCartStore from '../store/cart';
+import { CartContext } from '../context/CartContext';
+
 import { Checkout } from './';
+import { Button } from '@mui/material';
 
 const StyledBadge = styled(Badge)<BadgeProps>(() => ({
   '& .MuiBadge-badge': {
@@ -31,10 +32,16 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
 }));
 
 function ShoppingCart({ mode }: ThemeModeProps) {
+  const {
+    increaseQuantity,
+    decreaseQuantity,
+    removeItemFromCart,
+    cartItems,
+    getCartTotalPrice,
+    getCartTotalQuantity,
+    clearCart,
+  } = React.useContext(CartContext);
   const [open, setOpen] = React.useState(false);
-
-  const { increaseQuantity, decreaseQuantity, cartItems, removeItemFromCart } =
-    useCartStore();
 
   const onIncreaseQuantity = (productId: string) => {
     increaseQuantity(productId);
@@ -52,16 +59,8 @@ function ShoppingCart({ mode }: ThemeModeProps) {
     setOpen(newOpen);
   };
 
-  const cartQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-
-  // const cartTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const cartTotal = cartItems.reduce(
-    (acc, item) => acc + (item.discountPrice || item.price) * item.quantity,
-    0
-  );
-
   return (
-    <div>
+    <>
       <AppBar
         position='fixed'
         sx={{
@@ -106,80 +105,111 @@ function ShoppingCart({ mode }: ThemeModeProps) {
                 onClick={toggleDrawer(true)}
                 sx={{ minWidth: '30px', p: '4px' }}
               >
-                <StyledBadge badgeContent={cartQuantity} color='primary'>
+                <StyledBadge badgeContent={getCartTotalQuantity()} color='primary'>
                   <ShoppingBag fontSize='large' />
                 </StyledBadge>
               </IconButton>
               <Drawer anchor='bottom' open={open} onClose={toggleDrawer(false)}>
                 <Box
                   sx={{
-                    minWidth: '60dvw',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
                     p: 2,
                     backgroundColor: 'background.paper',
                     flexGrow: 1,
                   }}
                 >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'end',
-                      flexGrow: 1,
-                    }}
-                  ></Box>
                   <List>
                     {cartItems.length > 0 ? (
                       <>
                         <List>
                           {cartItems.map((item, index) => (
-                            <ListItem key={index}>
-                              <ListItemText primary={item.productTitle} />
-                              {item.discountPrice && (
-                                <Typography
-                                  variant='body2'
-                                  color='text.secondary'
-                                  sx={{ textDecoration: 'line-through', mr: 1 }}
-                                >
-                                  {item.price} kr
-                                </Typography>
-                              )}
-                              <Typography variant='body2' color='text.secondary'>
-                                {item.discountPrice || item.price} kr
-                              </Typography>
-                              <IconButton
-                                onClick={() => onDecreaseQuantity(item.id)}
-                                aria-label='decrease'
+                            <ListItem
+                              sx={{
+                                mr: 2,
+                                border: '1px solid #ddd',
+                                borderRadius: '12px',
+                                padding: '10px',
+                                marginBottom: '10px',
+                              }}
+                              key={index}
+                            >
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'space-between',
+                                  width: '300px',
+                                }}
                               >
-                                <RemoveIcon />
-                              </IconButton>
-                              <Typography variant='body2' color='text.secondary'>
-                                {item.quantity} st
-                              </Typography>
-                              <IconButton
-                                onClick={() => onIncreaseQuantity(item.id)}
-                                aria-label='increase'
-                              >
-                                <AddIcon />
-                              </IconButton>
-                              <ListItemSecondaryAction>
-                                <IconButton
-                                  onClick={() => onRemoveItem(item.id)}
-                                  edge='end'
-                                  aria-label='delete'
-                                >
-                                  <RemoveCircleOutlineIcon color='error' />
-                                </IconButton>
-                              </ListItemSecondaryAction>
+                                <ListItemText primary={item.productTitle} />
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                  {item.discountPrice && (
+                                    <Typography
+                                      variant='body2'
+                                      color='text.secondary'
+                                      sx={{ textDecoration: 'line-through', mr: 1 }}
+                                    >
+                                      {item.price} kr
+                                    </Typography>
+                                  )}
+                                  <Typography variant='body2' color='text.secondary'>
+                                    {item.discountPrice || item.price} kr
+                                  </Typography>
+                                  <IconButton
+                                    onClick={() => onDecreaseQuantity(item.id)}
+                                    aria-label='decrease'
+                                  >
+                                    <RemoveIcon />
+                                  </IconButton>
+                                  <Typography variant='body2' color='text.secondary'>
+                                    {item.quantity} st
+                                  </Typography>
+                                  <IconButton
+                                    onClick={() => onIncreaseQuantity(item.id)}
+                                    aria-label='increase'
+                                    sx={{ mr: 2 }}
+                                  >
+                                    <AddIcon />
+                                  </IconButton>
+                                  <ListItemSecondaryAction>
+                                    <IconButton
+                                      onClick={() => onRemoveItem(item.id)}
+                                      edge='end'
+                                      aria-label='delete'
+                                    >
+                                      <RemoveCircleOutlineIcon color='error' />
+                                    </IconButton>
+                                  </ListItemSecondaryAction>
+                                </Box>
+                              </Box>
                             </ListItem>
                           ))}
                         </List>
                         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                           <Typography variant='h6' color='textSecondary'>
-                            Total: {cartTotal} kr
+                            Total: {getCartTotalPrice()} kr
                           </Typography>
                         </Box>
-                        <Divider />
-                        <Box sx={{ display: 'flex', justifyContent: 'center', pt: 1 }}>
+
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'flex-end',
+                            pt: 1,
+                            gap: 1,
+                          }}
+                        >
+                          <Button
+                            variant='outlined'
+                            color='secondary'
+                            size='small'
+                            onClick={clearCart}
+                          >
+                            Töm varukorg
+                          </Button>
                           <Checkout mode={mode} />
                         </Box>
                       </>
@@ -195,7 +225,7 @@ function ShoppingCart({ mode }: ThemeModeProps) {
           </Toolbar>
         </Container>
       </AppBar>
-    </div>
+    </>
   );
 }
 

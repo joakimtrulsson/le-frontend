@@ -7,6 +7,7 @@ import Divider from '@mui/material/Divider';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import getLightDarkTheme from './getLightDarkTheme';
+import { CartProvider } from './context/CartContext';
 
 import {
   NavBar,
@@ -38,30 +39,32 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={LightDarkTheme}>
-        <CssBaseline />
-        <NavBar mode={mode} toggleLightDarkMode={toggleLightDarkMode} />
-        <Router>
-          <Routes>
-            <Route path='/status' element={<OrderConfirmation />} />
-            <Route path='/error' element={<Error />} />
-            <Route path='/' element={<Navigate to='/' />} />
-          </Routes>
-        </Router>
-        <Hero mode={mode} />
-        <Box sx={{ bgcolor: 'background.default' }}>
-          <OurPartners mode={mode} />
-          <Divider />
-          <Products />
-          <Divider />
-          <Projects />
-          <Divider />
-          <Services />
-          <Divider />
-          <Reviews />
-          <Divider />
-          <Footer mode={mode} />
-        </Box>
-        <ShoppingCart mode={mode} />
+        <CartProvider>
+          <CssBaseline />
+          <NavBar mode={mode} toggleLightDarkMode={toggleLightDarkMode} />
+          <Router>
+            <Routes>
+              <Route path='/status' element={<OrderConfirmation />} />
+              <Route path='/error' element={<Error />} />
+              <Route path='/' element={<Navigate to='/' />} />
+            </Routes>
+          </Router>
+          <Hero mode={mode} />
+          <Box sx={{ bgcolor: 'background.default' }}>
+            <OurPartners mode={mode} />
+            <Divider />
+            <Products />
+            <Divider />
+            <Projects />
+            <Divider />
+            <Services />
+            <Divider />
+            <Reviews />
+            <Divider />
+            <Footer mode={mode} />
+          </Box>
+          <ShoppingCart mode={mode} />
+        </CartProvider>
       </ThemeProvider>
     </ApolloProvider>
   );

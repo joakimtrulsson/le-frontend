@@ -10,14 +10,14 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SendIcon from '@mui/icons-material/Send';
-import useCartStore from '../store/cart';
+import { CartContext } from '../context/CartContext';
 import { ThemeModeProps } from '../types/';
 
 function Checkout({ mode }: ThemeModeProps) {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [errorAlert, setErrorAlert] = React.useState(false);
-  const { cartItems } = useCartStore();
+  const { cartItems } = React.useContext(CartContext);
   const CHECKOUT_URL = import.meta.env.VITE_CHECKOUT_URL;
   const CHECKOUT_TOKEN = import.meta.env.VITE_CHECKOUT_TOKEN;
 
@@ -74,7 +74,7 @@ function Checkout({ mode }: ThemeModeProps) {
 
   return (
     <>
-      <Button variant='outlined' size='small' onClick={handleClickOpen}>
+      <Button variant='contained' color='primary' size='small' onClick={handleClickOpen}>
         Checkout
       </Button>
       <Dialog
@@ -131,7 +131,6 @@ function Checkout({ mode }: ThemeModeProps) {
           <LoadingButton
             size='small'
             type='submit'
-            // onClick={handleClick}
             endIcon={<SendIcon />}
             loading={loading}
             loadingPosition='end'
