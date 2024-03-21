@@ -10,28 +10,8 @@ import { Product } from '../types/';
 
 import { ProductCard } from './';
 
-import { useQuery, gql } from '@apollo/client';
-
-const GET_PRODUCTS = gql`
-  query Query($where: ProductWhereInput!) {
-    products(where: $where) {
-      id
-      productTitle
-      description
-      price
-      priceUnit
-      productImage {
-        url
-      }
-      discountPrice
-    }
-    siteConfig {
-      productsPreamble {
-        document
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { GET_PRODUCTS } from '../graphql/queries';
 
 export default function Products() {
   const { loading, data } = useQuery(GET_PRODUCTS, {

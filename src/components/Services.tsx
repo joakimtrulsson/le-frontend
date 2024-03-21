@@ -13,17 +13,8 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import ForestIcon from '@mui/icons-material/Forest';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 
-import { useQuery, gql } from '@apollo/client';
-
-const GET_SERVICE_PREAMBLE = gql`
-  query SiteConfig {
-    siteConfig {
-      ourServicesPreamble {
-        document
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { GET_SERVICE_PREAMBLE } from '../graphql/queries';
 
 const items = [
   {

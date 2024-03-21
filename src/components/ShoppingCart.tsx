@@ -17,7 +17,6 @@ import IconButton from '@mui/material/IconButton';
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import { ShoppingBag } from '@mui/icons-material';
-
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
 import { ThemeModeProps } from '../types';
 

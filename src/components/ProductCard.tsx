@@ -1,20 +1,12 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { Button } from '@mui/material';
-// import CircularProgress from '@mui/material/CircularProgress';
-// import { DocumentRenderer } from '@keystone-6/document-renderer';
-import { Product } from '../types/';
+import ProductCardProps from '../types/ProductCard';
 
-interface ProductCardProps {
-  product: Product;
-  onAddToCart: (product: Product) => void;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
   return (
     <Stack
       direction='column'
@@ -42,7 +34,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
           justifyContent: 'flex-end',
           alignItems: 'flex-end',
           height: { xs: 250, sm: 275 },
-          // width: '100%',
           borderRadius: '10px',
           backgroundImage: product.productImage ? `url(${product.productImage.url})` : '',
           backgroundSize: 'cover',
@@ -140,6 +131,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
       </Box>
     </Stack>
   );
-};
-
-export default ProductCard;
+}

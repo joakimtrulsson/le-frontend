@@ -12,31 +12,15 @@ import { useMediaQuery } from '@mui/material';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 import { Review } from '../types/';
 
-import { useQuery, gql } from '@apollo/client';
-
-const GET_REWIEWS = gql`
-  query Reviews($orderBy: [ReviewOrderByInput!]!) {
-    reviews(orderBy: $orderBy) {
-      id
-      reviewBy
-      reviewText
-      location
-      date
-    }
-    siteConfig {
-      reviewsPreamble {
-        document
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { GET_REVIEWS } from '../graphql/queries';
 
 export default function Reviews() {
   const isSmallScreen = useMediaQuery('(max-width:600px)');
   const columns = isSmallScreen ? 1 : 3;
   const [reviews, setReviews] = React.useState<Review[]>([]);
   const [preamble, setPreamble] = React.useState<DocumentRendererProps['document']>();
-  const { loading, data } = useQuery(GET_REWIEWS, {
+  const { loading, data } = useQuery(GET_REVIEWS, {
     variables: {
       orderBy: [
         {

@@ -11,31 +11,9 @@ import { styled } from '@mui/system';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 import { ThemeModeProps, HeroData } from '../types/';
 import { Forms } from './';
+import { GET_HERO } from '../graphql/queries';
 
-import { useQuery, gql } from '@apollo/client';
-
-const GET_HERO = gql`
-  query SiteConfig {
-    siteConfig {
-      siteTitle
-      heroPreamble {
-        document
-      }
-      heroImage1 {
-        url
-      }
-      heroImage2 {
-        url
-      }
-      heroImage3 {
-        url
-      }
-      heroImage4 {
-        url
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
 
 const logoStyle = {
   width: '72px',

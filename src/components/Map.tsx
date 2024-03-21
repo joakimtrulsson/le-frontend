@@ -4,17 +4,8 @@ import { TileLayer, ZoomControl, MapContainer, Marker, Popup } from 'react-leafl
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 import styled, { createGlobalStyle } from 'styled-components';
 
-import { useQuery, gql } from '@apollo/client';
-
-const GET_PREAMBLE = gql`
-  query SiteConfig {
-    siteConfig {
-      ourLocationPreamble {
-        document
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { GET_PREAMBLE } from '../graphql/queries';
 
 const GlobalStyle = createGlobalStyle`
   .leaflet-popup-content-wrapper {

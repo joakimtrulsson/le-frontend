@@ -14,29 +14,8 @@ import { Divider, Pagination } from '@mui/material';
 import { Project } from '../types/';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 
-import { useQuery, gql } from '@apollo/client';
-
-const GET_PROJECTS = gql`
-  query Query($orderBy: [ProjectOrderByInput!]!) {
-    projects(orderBy: $orderBy) {
-      id
-      projectTitle
-      shortDescription
-      fullDescription
-      projectImage {
-        url
-      }
-      location
-      icon
-      date
-    }
-    siteConfig {
-      projectsPreamble {
-        document
-      }
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
+import { GET_PROJECTS } from '../graphql/queries';
 
 const projectsPerPage = 3;
 

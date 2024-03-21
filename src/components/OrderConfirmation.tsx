@@ -6,23 +6,16 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import Order from '../types/Order';
-import OrderConfirmationProps from '../types/OrderConfirmationProps';
 
-import { useQuery, gql } from '@apollo/client';
+import { useSearchParams } from 'react-router-dom';
+import { GET_ORDERDETAILS } from '../graphql/queries';
 
-const GET_ORDERDETAILS = gql`
-  query Order($where: OrderWhereUniqueInput!) {
-    order(where: $where) {
-      id
-      customerName
-      customerEmail
-      createdAt
-    }
-  }
-`;
+import { useQuery } from '@apollo/client';
 
-export default function OrderConfirmation({ orderId }: OrderConfirmationProps) {
+export default function OrderConfirmation() {
   const [open, setOpen] = React.useState(true);
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('order');
   const { data } = useQuery(GET_ORDERDETAILS, {
     variables: {
       where: {
