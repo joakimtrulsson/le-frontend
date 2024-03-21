@@ -51,7 +51,7 @@ export default function OrderConfirmation({ orderId }: OrderConfirmationProps) {
           <DialogTitle>Tack för din beställning, {order.customerName}!</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {` En orderbekräftelse har skickats till din epost: 
+              {`En orderbekräftelse har skickats till din epost: 
              ${order.customerEmail}`}
             </DialogContentText>
           </DialogContent>

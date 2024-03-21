@@ -28,7 +28,6 @@ function App() {
   const LightDarkTheme = createTheme(getLightDarkTheme(mode));
   const { order } = useQueryParams();
   const [isError, setIsError] = React.useState(false);
-  // const { loadingCount } = useLoadingStore();
 
   React.useEffect(() => {
     if (window.location.pathname === '/error') {
