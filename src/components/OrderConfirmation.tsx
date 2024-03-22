@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import Order from '../types/Order';
+import { Order } from '../types/';
 
 import { useSearchParams } from 'react-router-dom';
 import { GET_ORDERDETAILS } from '../graphql/queries';

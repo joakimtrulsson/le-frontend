@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import ToggleLightDarkModeProps from '../types/ToogleLightDarkModeProps';
+import ToggleLightDarkModeProps from '../types/ToggleLightDarkModeProps';
 
 import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
 import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';

@@ -3,14 +3,16 @@ import { createContext, useState } from 'react';
 import CartProduct from '../types/CartProduct';
 import Product from '../types/Product';
 
-export const CartContext = createContext({
-  cartItems: [] as CartProduct[],
-  addProductToCart: (_item: Product) => {},
-  increaseQuantity: (_productId: string) => {},
-  decreaseQuantity: (_productId: string) => {},
-  removeItemFromCart: (_productId: string) => {},
-  getCartTotalPrice: () => 0 as number,
-  getCartTotalQuantity: () => 0 as number,
+import { CartState } from '../types/';
+
+export const CartContext = createContext<CartState>({
+  cartItems: [],
+  addProductToCart: (_item) => {},
+  increaseQuantity: (_productId) => {},
+  decreaseQuantity: (_productId) => {},
+  removeItemFromCart: (_productId) => {},
+  getCartTotalPrice: () => 0,
+  getCartTotalQuantity: () => 0,
   clearCart: () => {},
 });
 

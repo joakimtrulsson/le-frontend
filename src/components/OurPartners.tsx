@@ -11,7 +11,7 @@ import energyWhiteLogo from '../assets/partners/energi/energi-white.png';
 import energyGreyLogo from '../assets/partners/energi/energi-grey.png';
 import prestoWhiteLogo from '../assets/partners/presto/presto-transparent-white.png';
 import prestoGreyLogo from '../assets/partners/presto/presto-transparent-grey.png';
-import ThemeModeProps from '../types/ThemeModeProps';
+import { ThemeModeProps } from '../types';
 
 const logoStyle = {
   height: '40px',

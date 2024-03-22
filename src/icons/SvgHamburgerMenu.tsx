@@ -1,4 +1,3 @@
-// import * as React from 'react';
 import RootSvg, { RootSvgProps } from './RootSvg';
 
 export default function SvgHamburgerMenu(props: RootSvgProps) {

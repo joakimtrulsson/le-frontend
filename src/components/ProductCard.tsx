@@ -5,10 +5,10 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { Button } from '@mui/material';
-import ProductCardProps from '../types/ProductCard';
+import { Product } from '../types';
 import { CartContext } from '../context/CartContext';
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product }: { product: Product }) {
   const { addProductToCart } = React.useContext(CartContext);
 
   return (

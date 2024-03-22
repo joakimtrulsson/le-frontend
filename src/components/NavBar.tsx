@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ToggleLightDarkMode from './ToggleLightDarkMode';
 import lightLogo from '../assets/le-high-resolution-logo-transparent-cropped.svg';
 import darkLogo from '../assets/le-high-resolution-logo-transparent-cropped-footer.svg';
-import NavBarProps from '../types/NavBarProps';
+import { NavBarProps } from '../types';
 
 import { Forms } from './';
 

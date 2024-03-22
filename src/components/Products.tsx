@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { CircularProgress } from '@mui/material';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
-import useCartStore from '../store/cart';
 import { Product } from '../types/';
 
 import { ProductCard } from './';
@@ -24,7 +23,6 @@ export default function Products() {
     },
   });
   const [preamble, setPreamble] = React.useState<DocumentRendererProps['document']>();
-  const { addItemToCart } = useCartStore();
 
   React.useEffect(() => {
     if (data) {
@@ -77,7 +75,7 @@ export default function Products() {
           ) : (
             data?.products.map((product: Product) => (
               <Grid item xs={12} sm={6} md={4} key={product.id}>
-                <ProductCard product={product} onAddToCart={addItemToCart} />
+                <ProductCard product={product} />
               </Grid>
             ))
           )}
