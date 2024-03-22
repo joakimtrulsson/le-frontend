@@ -45,8 +45,8 @@ export const GET_PREAMBLE = gql`
 `;
 
 export const GET_PRODUCTS = gql`
-  query Query($where: ProductWhereInput!) {
-    products(where: $where) {
+  query Query($where: ProductWhereInput!, $orderBy: [ProductOrderByInput!]!) {
+    products(where: $where, orderBy: $orderBy) {
       id
       productTitle
       description

@@ -10,3 +10,4 @@ export type { default as Review } from './Review';
 export type { default as ThemeModeProps } from './ThemeModeProps';
 export type { default as FormValues } from './FormValues';
 export type { default as ToggleLightDarkModeProps } from './ToggleLightDarkModeProps';
+export type { default as SortOrder } from './SortOrder';
