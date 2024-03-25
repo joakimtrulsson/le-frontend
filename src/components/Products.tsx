@@ -105,7 +105,7 @@ export default function Products() {
               disablePortal
               size='small'
               value={filter}
-              onChange={(event, newValue) => setFilter(newValue)}
+              onChange={(_, newValue) => setFilter(newValue)}
               options={[
                 'Alla',
                 ...(categoriesData?.productCategories
