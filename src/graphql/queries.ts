@@ -55,12 +55,24 @@ export const GET_PRODUCTS = gql`
       productImage {
         url
       }
+      productCategory {
+        categoryTitle
+      }
       discountPrice
     }
     siteConfig {
       productsPreamble {
         document
       }
+    }
+  }
+`;
+
+export const GET_PRODUCT_CATEGORIES = gql`
+  query ProductCategories {
+    productCategories {
+      id
+      categoryTitle
     }
   }
 `;

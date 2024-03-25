@@ -10,6 +10,7 @@ import { CartContext } from '../context/CartContext';
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addProductToCart } = React.useContext(CartContext);
+  console.log(product.productCategory.categoryTitle);
 
   return (
     <Stack
@@ -55,9 +56,21 @@ export default function ProductCard({ product }: { product: Product }) {
         </Button>
       </Box>
       <Box sx={{ px: 2, py: 0 }}>
-        <Typography component='h3' variant='h6'>
-          {product.productTitle}
-        </Typography>
+        <Box sx={{ display: 'flex' }}>
+          <Typography component='h3' variant='h6'>
+            {product.productTitle}
+          </Typography>
+          <Divider
+            className='product-divider'
+            orientation='vertical'
+            flexItem
+            sx={{ borderColor: 'primary.dark', mx: 1 }}
+          />
+          <Typography variant='subtitle2' sx={{ color: 'grey.500' }}>
+            {product.productCategory.categoryTitle}
+          </Typography>
+        </Box>
+
         <Typography variant='body2' gutterBottom sx={{ color: 'grey.400' }}>
           {product.description}
         </Typography>

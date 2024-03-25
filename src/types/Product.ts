@@ -4,6 +4,9 @@ export default interface Product {
   description: string;
   price: number;
   priceUnit: string;
+  productCategory: {
+    categoryTitle: string;
+  };
   productImage: {
     url: string;
   };

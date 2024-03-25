@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { CircularProgress } from '@mui/material';
+import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Button from '@mui/material/Button';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -14,16 +14,21 @@ import { Product, SortOrder } from '../types/';
 import { ProductCard } from './';
 
 import { useQuery } from '@apollo/client';
-import { GET_PRODUCTS } from '../graphql/queries';
+import { GET_PRODUCTS, GET_PRODUCT_CATEGORIES } from '../graphql/queries';
 
 export default function Products() {
   const [sort, setSort] = React.useState<SortOrder>('asc');
+  const [filter, setFilter] = React.useState<string>('Alla');
+  const { data: categoriesData } = useQuery(GET_PRODUCT_CATEGORIES);
   const { loading, data } = useQuery(GET_PRODUCTS, {
     variables: {
       where: {
         status: {
           equals: 'published',
         },
+        ...(filter !== 'Alla' && {
+          productCategory: { categoryTitle: { equals: filter } },
+        }),
       },
       orderBy: getOrderByValue(sort),
     },
@@ -84,32 +89,63 @@ export default function Products() {
         <Box
           sx={{
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: 'space-between',
+            width: '100%',
             alignSelf: { xs: 'center', sm: 'center', md: 'flex-end' },
             gap: 2,
             mb: { xs: -1, sm: -4, md: -4 },
           }}
         >
-          <Typography sx={{ color: 'grey.400' }}>Sortera efter pris:</Typography>
-          <ButtonGroup variant='contained'>
-            <Button
-              onClick={() => setSort('asc')}
-              endIcon={<ArrowUpwardIcon />}
+          <Box>
+            <Autocomplete
+              sx={{
+                alignSelf: { xs: 'flex-end', sm: 'flex-end' },
+              }}
+              disablePortal
               size='small'
-              variant={sort === 'asc' ? 'outlined' : 'contained'}
-            >
-              Stigande
-            </Button>
-            <Button
-              onClick={() => setSort('desc')}
-              endIcon={<ArrowDownwardIcon />}
-              size='small'
-              variant={sort === 'desc' ? 'outlined' : 'contained'}
-            >
-              Fallande
-            </Button>
-          </ButtonGroup>
+              value={filter}
+              onChange={(event, newValue) => setFilter(newValue)}
+              options={[
+                'Alla',
+                ...(categoriesData?.productCategories
+                  ? categoriesData.productCategories.map(
+                      (category: { categoryTitle: string }) => category.categoryTitle
+                    )
+                  : []),
+              ]}
+              renderInput={(params) => (
+                <TextField
+                  variant='outlined'
+                  color='secondary'
+                  {...params}
+                  label='Filtrera efter kategori'
+                />
+              )}
+            />
+          </Box>
+
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography sx={{ color: 'grey.400', mr: 1 }}>Sortera efter pris:</Typography>
+            <ButtonGroup variant='contained'>
+              <Button
+                onClick={() => setSort('asc')}
+                endIcon={<ArrowUpwardIcon />}
+                size='small'
+                variant={sort === 'asc' ? 'outlined' : 'contained'}
+              >
+                Stigande
+              </Button>
+              <Button
+                onClick={() => setSort('desc')}
+                endIcon={<ArrowDownwardIcon />}
+                size='small'
+                variant={sort === 'desc' ? 'outlined' : 'contained'}
+              >
+                Fallande
+              </Button>
+            </ButtonGroup>
+          </Box>
         </Box>
         <Grid container spacing={2.5}>
           {loading ? (
