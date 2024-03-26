@@ -21,6 +21,7 @@ import {
   ShoppingCart,
   Error,
   OrderConfirmation,
+  Map,
 } from './components';
 
 function App() {
@@ -60,6 +61,8 @@ function App() {
             <Services />
             <Divider />
             <Reviews />
+            <Divider />
+            <Map />
             <Divider />
             <Footer mode={mode} />
           </Box>

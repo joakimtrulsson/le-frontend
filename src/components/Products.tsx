@@ -10,9 +10,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { DocumentRenderer, DocumentRendererProps } from '@keystone-6/document-renderer';
 import { Product, SortOrder } from '../types/';
-
 import { ProductCard } from './';
-
 import { useQuery } from '@apollo/client';
 import { GET_PRODUCTS, GET_PRODUCT_CATEGORIES } from '../graphql/queries';
 

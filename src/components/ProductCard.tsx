@@ -10,7 +10,6 @@ import { CartContext } from '../context/CartContext';
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addProductToCart } = React.useContext(CartContext);
-  console.log(product.productCategory.categoryTitle);
 
   return (
     <Stack
